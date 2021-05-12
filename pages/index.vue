@@ -11,18 +11,18 @@
       <section class="w-full text-center sm:text-left space-y-4 col-span-2">
         <h2 class="text-4xl text-black font-bold">Hi, I'm Tony.</h2>
         <p class="text-lg text-black">
-          I'm a senior full stack engineer with a passion for coding. Welcome to
-          my home. I'm glad you're here!
+          I'm a senior full stack engineer with a passion for coding. Welcome to my home. I'm glad
+          you're here!
         </p>
       </section>
-      <section class="col-span-2 text-center sm:text-left">
+      <!-- <section class="col-span-2 text-center sm:text-left">
         <button
           type="button"
-          class="focus:outline-none ring ring-blue-600 ring-offset-2 text-white text-sm py-2 px-4 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+          class="focus:outline-none ring ring-green-600 ring-offset-2 text-white text-sm py-2 px-4 rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg"
         >
           Find out more
-        </button></section
-      >
+        </button>
+      </section> -->
     </header>
     <!-- Projects -->
   </div>

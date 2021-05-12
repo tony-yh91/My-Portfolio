@@ -37,5 +37,14 @@ export default {
   modules: ['@nuxt/http'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    babel: {
+      plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
+    },
+  },
+
+  // server: {
+  //   port: 80,
+  //   host: '0.0.0.0',
+  // },
 }

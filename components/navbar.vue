@@ -1,22 +1,18 @@
 <template>
-  <!-- This example requires Tailwind CSS v2.0+ -->
-  <div>
-    <nav>
-      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div
-          class="relative flex items-center justify-center sm:justify-between h-16"
-        >
-          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <!-- Mobile menu button-->
-            <!-- <button
+  <nav class="sticky top-0 z-10 bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div class="relative flex items-center justify-center sm:justify-between h-16">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <!-- Mobile menu button-->
+          <!-- <button
               type="button"
               class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
               aria-expanded="false"
               @click="isMenuOn = !isMenuOn"
             > -->
-            <span class="sr-only">Open main menu</span>
-            <!-- <svg
+          <span class="sr-only">Open main menu</span>
+          <!-- <svg
                 :class="isMenuOn ? 'hidden' : 'block'"
                 class="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +28,7 @@
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg> -->
-            <!-- <svg
+          <!-- <svg
                 :class="isMenuOn ? 'block' : 'hidden'"
                 class="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -48,81 +44,79 @@
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg> -->
-            <!-- <div
+          <!-- <div
               class="menu-btn mt-1"
               :class="isMenuOn ? 'open' : ''"
               @click="isMenuOn = !isMenuOn"
             >
               <div class="menu-btn__burger"></div>
             </div> -->
-            <svg
-              class="ham hamRotate ham1"
-              viewBox="0 0 100 100"
-              width="80"
-              :class="isMenuOn ? 'active' : ''"
-              @click="isMenuOn = !isMenuOn"
-            >
-              <path
-                class="line top"
-                d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"
-              />
-              <path class="line middle" d="m 30,50 h 40" />
-              <path
-                class="line bottom"
-                d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"
-              />
-            </svg>
-            <!-- </button> -->
-          </div>
-          <div class="flex items-center mr-2">
-            <h2 class="font-black text-2xl text-base hidden lg:block"
-              >Ye Htet Aung</h2
-            >
-          </div>
-          <div class="hidden sm:flex items-center">
-            <div class="flex space-x-4">
-              <NuxtLink
-                href="#"
-                to="/"
-                exact-active-class="text-green-400"
-                class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
-                >Home</NuxtLink
-              >
-              <NuxtLink
-                href="#"
-                to="/"
-                class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
-                >Blog</NuxtLink
-              >
-
-              <NuxtLink
-                href="#"
-                to="/"
-                class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
-                >Resume</NuxtLink
-              >
-
-              <NuxtLink
-                href="#"
-                to="about"
-                exact-active-class="text-green-400"
-                class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
-                >About</NuxtLink
-              >
-            </div>
-          </div>
-          <div
-            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+          <svg
+            class="ham hamRotate ham1"
+            viewBox="0 0 100 100"
+            width="80"
+            :class="isMenuOn ? 'active' : ''"
+            @click="isMenuOn = !isMenuOn"
           >
-            <button
-              type="button"
-              class="focus:outline-none ring ring-blue-600 ring-offset-2 text-white text-sm py-2 px-4 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+            <path
+              class="line top"
+              d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"
+            />
+            <path class="line middle" d="m 30,50 h 40" />
+            <path
+              class="line bottom"
+              d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"
+            />
+          </svg>
+          <!-- </button> -->
+        </div>
+        <div class="flex items-center mr-2">
+          <h2 class="font-black text-2xl hidden lg:block">Ye Htet Aung</h2>
+        </div>
+        <div class="hidden sm:flex items-center">
+          <div class="flex space-x-4">
+            <NuxtLink
+              href="#"
+              to="/"
+              exact-active-class="text-green-400"
+              class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Home</NuxtLink
             >
-              Contact me
-            </button>
+            <NuxtLink
+              href="#"
+              to="/"
+              class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Blog</NuxtLink
+            >
 
-            <!-- Profile dropdown -->
-            <!-- <div class="ml-3 relative">
+            <NuxtLink
+              href="#"
+              to="/"
+              class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >Resume</NuxtLink
+            >
+
+            <NuxtLink
+              href="#"
+              to="about"
+              exact-active-class="text-green-400"
+              class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              >About</NuxtLink
+            >
+          </div>
+        </div>
+        <div
+          class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+        >
+          <button
+            type="button"
+            class="transition-opacity focus:outline-none ring ring-green-600 ring-offset-2 text-white text-sm py-2 px-4 rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg"
+          >
+            Contact me
+          </button>
+
+          <!-- Profile dropdown -->
+          <!-- <div class="ml-3 relative">
               <div>
                 <button
                   id="user-menu"
@@ -176,52 +170,84 @@
                 </div>
               </transition>
             </div> -->
-          </div>
         </div>
       </div>
-
-      <!-- Mobile menu, show/hide based on menu state. -->
-      <transition name="slide">
-        <div v-show="isMenuOn" id="mobile-menu">
-          <div class="px-2 pt-2 pb-3 space-y-1 flex flex-col text-center">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <NuxtLink
-              to="/"
-              exact-active-class="text-green-400"
-              class="block px-3 py-2 rounded-md text-base font-medium"
-              @click.native="isMenuOn = false"
-              >Home</NuxtLink
-            >
-
-            <NuxtLink
-              href="#"
-              to="/"
-              exact-active-class="text-green-400"
-              class="block px-3 py-2 rounded-md text-base font-medium"
-              >Blog</NuxtLink
-            >
-
-            <NuxtLink
-              href="#"
-              to="/"
-              exact-active-class="text-green-400"
-              class="block px-3 py-2 rounded-md text-base font-medium"
-              >Resume</NuxtLink
-            >
-
-            <NuxtLink
-              href="#"
-              to="about"
-              exact-active-class="text-green-400"
-              class="block px-3 py-2 rounded-md text-base font-medium"
-              @click.native="isMenuOn = false"
-              >About</NuxtLink
-            >
-          </div>
+    </div>
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <!-- <transition
+      enter-active-class="slide-enter-active"
+      enter-class="slide-enter"
+      enter-to-class="slide-enter-to"
+      leave-active-class="slide-leave-active"
+      leave-class="slide-leave"
+      leave-to-class="slide-leave-to"
+    > -->
+    <div
+      class="sm:hidden flex mobile-menu items-center top-0 h-screen absolute w-full bg-white backdrop-filter backdrop-blur-md bg-opacity-90 firefox:bg-opacity-400"
+      :class="[isMenuOn ? 'show' : 'hide']"
+    >
+      <div class="px-5 py-5 space-y-3 text-left">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <div
+          class="menu-link"
+          :class="[isMenuOn ? 'show' : 'hide']"
+          style="transition: transform 0.5s"
+        >
+          <NuxtLink
+            to="/"
+            exact-active-class="text-green-400"
+            class="block px-3 py-2 rounded-md text-base font-medium"
+            @click.native="isMenuOn = false"
+            >Home</NuxtLink
+          >
         </div>
-      </transition>
-    </nav>
-  </div>
+
+        <div
+          class="menu-link"
+          :class="[isMenuOn ? 'show' : 'hide']"
+          style="transition: transform 0.6s"
+        >
+          <NuxtLink
+            href="#"
+            to="/"
+            exact-active-class="text-green-400"
+            class="block px-3 py-2 rounded-md text-base font-medium"
+            >Blog</NuxtLink
+          >
+        </div>
+
+        <div
+          class="menu-link"
+          :class="[isMenuOn ? 'show' : 'hide']"
+          style="transition: transform 0.7s"
+        >
+          <NuxtLink
+            href="#"
+            to="/"
+            exact-active-class="text-green-400"
+            class="block px-3 py-2 rounded-md text-base font-medium"
+            >Resume</NuxtLink
+          >
+        </div>
+
+        <div
+          class="menu-link"
+          :class="[isMenuOn ? 'show' : 'hide']"
+          style="transition: transform 0.8s"
+        >
+          <NuxtLink
+            href="#"
+            to="about"
+            exact-active-class="text-green-400"
+            class="block px-3 py-2 rounded-md text-base font-medium"
+            @click.native="isMenuOn = false"
+            >About</NuxtLink
+          >
+        </div>
+      </div>
+    </div>
+    <!-- </transition> -->
+  </nav>
 </template>
 <script>
 export default {
@@ -258,14 +284,15 @@ export default {
 
 .slide-enter-to,
 .slide-leave {
-  max-height: 200px;
+  /* max-height: 200px; */
   overflow: hidden;
+  transition: 0.2s ease;
 }
 
 .slide-enter,
 .slide-leave-to {
   overflow: hidden;
-  max-height: 0;
+  /* max-height: 0; */
 }
 
 .ham {
@@ -277,6 +304,7 @@ export default {
   -ms-user-select: none;
   user-select: none;
   padding: 10px;
+  z-index: 10001;
 }
 .hamRotate.active {
   transform: rotate(45deg);
@@ -302,5 +330,40 @@ export default {
 }
 .ham1.active .bottom {
   stroke-dashoffset: -138px;
+}
+/*mobile nav menu*/
+.mobile-menu.show {
+  opacity: 1;
+  overflow: hidden;
+}
+
+.mobile-menu.hide {
+  opacity: 0;
+  overflow: hidden;
+}
+
+.mobile-menu {
+  /* transform: translate3d(-100vw, 0, 0); */
+  transition: opacity 0.7s;
+  -webkit-transition: opacity 0.7s;
+  -moz-transition: opacity 0.7s;
+  -o-transition: opacity 0.7s;
+  overflow: scroll;
+  z-index: 1000;
+}
+
+.menu-link {
+  overflow: scroll;
+  z-index: 1000;
+}
+
+.menu-link.show {
+  transform: translate3d(0vw, 0, 0);
+  overflow: hidden;
+}
+
+.menu-link.hide {
+  transform: translate3d(-100vw, 0, 0);
+  overflow: hidden;
 }
 </style>

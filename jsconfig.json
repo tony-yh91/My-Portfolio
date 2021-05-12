@@ -1,3 +1,9 @@
 {
-  "include": ["./src/**/*"]
+  "compilerOptions": {
+    "target": "es2016",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["components/*", "layouts/*", "pages/*", "store/*"]
+    }
+  }
 }
