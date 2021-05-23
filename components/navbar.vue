@@ -1,56 +1,17 @@
 <template>
-  <nav class="sticky top-0 z-10 bg-white border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div class="relative flex items-center justify-center sm:justify-between h-16">
-        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+  <!-- <transition
+    enter-active-class="slide-enter-active"
+    enter-class="slide-enter"
+    enter-to-class="slide-enter-to"
+    leave-active-class="slide-leave-active"
+    leave-class="slide-leave"
+    leave-to-class="slide-leave-to"
+  > -->
+  <nav class="sticky top-0 z-10 bg-white" :class="{ 'navbar--hidden': !showNavbar }">
+    <div class="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
+      <div class="grid grid-flow-col grid-cols-3 mx-auto gap-3 sm:py-5 items-center">
+        <div class="sm:hidden flex items-center">
           <!-- Mobile menu button-->
-          <!-- <button
-              type="button"
-              class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-              @click="isMenuOn = !isMenuOn"
-            > -->
-          <span class="sr-only">Open main menu</span>
-          <!-- <svg
-                :class="isMenuOn ? 'hidden' : 'block'"
-                class="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg> -->
-          <!-- <svg
-                :class="isMenuOn ? 'block' : 'hidden'"
-                class="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg> -->
-          <!-- <div
-              class="menu-btn mt-1"
-              :class="isMenuOn ? 'open' : ''"
-              @click="isMenuOn = !isMenuOn"
-            >
-              <div class="menu-btn__burger"></div>
-            </div> -->
           <svg
             class="ham hamRotate ham1"
             viewBox="0 0 100 100"
@@ -70,44 +31,38 @@
           </svg>
           <!-- </button> -->
         </div>
-        <div class="flex items-center mr-2">
-          <h2 class="font-black text-2xl hidden lg:block">Ye Htet Aung</h2>
+        <div class="col-span-2">
+          <h2 class="font-black text-2xl hidden lg:block">
+            <NuxtLink href="#" to="/">Ye Htet Aung</NuxtLink>
+          </h2>
         </div>
-        <div class="hidden sm:flex items-center">
-          <div class="flex space-x-4">
-            <NuxtLink
+        <div class="hidden sm:block justify-self-end">
+          <!-- <div class="flex content-end"> -->
+          <!-- <NuxtLink
               href="#"
               to="/"
               exact-active-class="text-green-400"
-              class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
+              class="hover:text-green-600 px-3 py-2 rounded-md font-medium"
               >Home</NuxtLink
-            >
-            <NuxtLink
-              href="#"
-              to="/"
-              class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
-              >Blog</NuxtLink
-            >
+            > -->
+          <NuxtLink href="#" to="/" class="hover:text-green-600 px-3 py-2 rounded-md font-medium"
+            >Blog</NuxtLink
+          >
 
-            <NuxtLink
-              href="#"
-              to="/"
-              class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
-              >Resume</NuxtLink
-            >
+          <NuxtLink href="#" to="/" class="hover:text-green-600 px-3 py-2 rounded-md font-medium"
+            >Resume</NuxtLink
+          >
 
-            <NuxtLink
-              href="#"
-              to="about"
-              exact-active-class="text-green-400"
-              class="hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium"
-              >About</NuxtLink
-            >
-          </div>
+          <NuxtLink
+            href="#"
+            to="about"
+            exact-active-class="text-green-400"
+            class="hover:text-green-600 px-3 py-2 rounded-md font-medium"
+            >About</NuxtLink
+          >
+          <!-- </div> -->
         </div>
-        <div
-          class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-        >
+        <div class="justify-self-end">
           <button
             type="button"
             class="transition-opacity focus:outline-none ring ring-green-600 ring-offset-2 text-white text-sm py-2 px-4 rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg"
@@ -174,19 +129,11 @@
       </div>
     </div>
     <!-- Mobile menu, show/hide based on menu state. -->
-    <!-- <transition
-      enter-active-class="slide-enter-active"
-      enter-class="slide-enter"
-      enter-to-class="slide-enter-to"
-      leave-active-class="slide-leave-active"
-      leave-class="slide-leave"
-      leave-to-class="slide-leave-to"
-    > -->
     <div
-      class="sm:hidden flex mobile-menu items-center top-0 h-screen absolute w-full bg-white backdrop-filter backdrop-blur-md bg-opacity-90 firefox:bg-opacity-400"
+      class="sm:hidden mobile-menu top-0 absolute w-full bg-white backdrop-filter backdrop-blur-md bg-opacity-50 firefox:bg-opacity-400"
       :class="[isMenuOn ? 'show' : 'hide']"
     >
-      <div class="px-5 py-5 space-y-3 text-left">
+      <div class="px-5 pt-24 py-5 space-y-3 text-left font-bold text-2xl h-screen">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <div
           class="menu-link"
@@ -196,7 +143,7 @@
           <NuxtLink
             to="/"
             exact-active-class="text-green-400"
-            class="block px-3 py-2 rounded-md text-base font-medium"
+            class="block px-3 py-2 rounded-md"
             @click.native="isMenuOn = false"
             >Home</NuxtLink
           >
@@ -211,7 +158,7 @@
             href="#"
             to="/"
             exact-active-class="text-green-400"
-            class="block px-3 py-2 rounded-md text-base font-medium"
+            class="block px-3 py-2 rounded-md"
             >Blog</NuxtLink
           >
         </div>
@@ -225,7 +172,7 @@
             href="#"
             to="/"
             exact-active-class="text-green-400"
-            class="block px-3 py-2 rounded-md text-base font-medium"
+            class="block px-3 py-2 rounded-md"
             >Resume</NuxtLink
           >
         </div>
@@ -239,23 +186,53 @@
             href="#"
             to="about"
             exact-active-class="text-green-400"
-            class="block px-3 py-2 rounded-md text-base font-medium"
+            class="block px-3 py-2 rounded-md"
             @click.native="isMenuOn = false"
             >About</NuxtLink
           >
         </div>
       </div>
     </div>
-    <!-- </transition> -->
   </nav>
+  <!-- </transition> -->
 </template>
 <script>
 export default {
   data() {
     return {
-      isOn: false,
       isMenuOn: false,
+      showNavbar: true,
+      currentScroll: 0,
     }
+  },
+  watch: {
+    isMenuOn(value) {
+      if (this.isMenuOn) {
+        document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = 'auto'
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.onScroll, true)
+    // this.isScrollUp = true
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll, true)
+  },
+  methods: {
+    onScroll(e) {
+      const scroll = window.scrollY
+      if (scroll < 0) {
+        return
+      }
+      if (Math.abs(scroll - this.currentScroll) < 60) {
+        return
+      }
+      this.showNavbar = scroll < this.currentScroll
+      this.currentScroll = scroll
+    },
   },
 }
 </script>
@@ -365,5 +342,18 @@ export default {
 .menu-link.hide {
   transform: translate3d(-100vw, 0, 0);
   overflow: hidden;
+}
+nav {
+  /* height: 60px;
+  width: 100vw;
+  background: hsl(200, 50%, 50%); */
+  /* position: fixed; */
+  /* box-shadow: 0 2px 15px rgba(71, 120, 120, 0.5); */
+  transform: translate3d(0, 0, 0);
+  transition: 0.1s all ease-out;
+}
+nav.navbar--hidden {
+  box-shadow: none;
+  transform: translate3d(0, -100%, 0);
 }
 </style>

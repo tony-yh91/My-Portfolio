@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-50 flex flex-col justify-between">
+  <div class="flex flex-col justify-between">
     <Navbar></Navbar>
     <transition name="home">
       <Nuxt />
