@@ -1,5 +1,7 @@
 <template>
-  <div class="container xl:mx-auto xl:max-w-6xl xl:px-4 divide-y divide-grey-200">
+  <div
+    class="container xl:max-w-6xl lg:max-w-4xl md:max-w-2xl sm:max-w-xl max-w-lg xl:mx-auto space-y-5 xl:px-4 divide-y divide-grey-200"
+  >
     <!-- About me  -->
     <section class="py-5 px-5 space-y-6 flex flex-col">
       <div class="space-y-3">
@@ -16,7 +18,7 @@
       </p>
       <p class="text-left text-lg">
         I specialize in Javascript which is the most popular programming language in web
-        development. It is also one of my favorite and strongest skills.
+        development.
       </p>
       <p class="text-left text-lg">
         I’m currently part of the team at Professy where I help to develop full-stack RESTful

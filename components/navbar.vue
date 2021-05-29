@@ -1,15 +1,7 @@
 <template>
-  <!-- <transition
-    enter-active-class="slide-enter-active"
-    enter-class="slide-enter"
-    enter-to-class="slide-enter-to"
-    leave-active-class="slide-leave-active"
-    leave-class="slide-leave"
-    leave-to-class="slide-leave-to"
-  > -->
-  <nav class="sticky top-0 z-10 bg-white" :class="{ 'navbar--hidden': !showNavbar }">
+  <header class="header-nav sticky top-0 z-10 bg-white" :class="{ 'navbar--hidden': !showNavbar }">
     <div class="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
-      <div class="grid grid-flow-col grid-cols-3 mx-auto gap-3 sm:py-5 items-center">
+      <div class="grid grid-flow-col grid-cols-2 md:grid-cols-4 mx-auto gap-3 sm:py-5 items-center">
         <div class="sm:hidden flex items-center">
           <!-- Mobile menu button-->
           <svg
@@ -32,11 +24,11 @@
           <!-- </button> -->
         </div>
         <div class="col-span-2">
-          <h2 class="font-black text-2xl hidden lg:block">
+          <h2 class="font-black text-2xl hidden sm:block">
             <NuxtLink href="#" to="/">Ye Htet Aung</NuxtLink>
           </h2>
         </div>
-        <div class="hidden sm:block justify-self-end">
+        <nav class="hidden col-span-2 sm:block justify-self-end">
           <!-- <div class="flex content-end"> -->
           <!-- <NuxtLink
               href="#"
@@ -61,17 +53,16 @@
             >About</NuxtLink
           >
           <!-- </div> -->
-        </div>
-        <div class="justify-self-end">
-          <button
-            type="button"
-            class="transition-opacity focus:outline-none ring ring-green-600 ring-offset-2 text-white text-sm py-2 px-4 rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg"
-          >
-            Contact me
-          </button>
-
-          <!-- Profile dropdown -->
-          <!-- <div class="ml-3 relative">
+        </nav>
+        <button
+          type="button"
+          class="focus:outline-none text-black text-sm py-2 px-4 rounded-md border-2 border-green-600 hover:shadow-xl"
+        >
+          Contact me
+        </button>
+        <!-- <div class="justify-self-end"> -->
+        <!-- Profile dropdown -->
+        <!-- <div class="ml-3 relative">
               <div>
                 <button
                   id="user-menu"
@@ -125,12 +116,12 @@
                 </div>
               </transition>
             </div> -->
-        </div>
+        <!-- </div> -->
       </div>
     </div>
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div
-      class="sm:hidden mobile-menu top-0 absolute w-full bg-white backdrop-filter backdrop-blur-md bg-opacity-50 firefox:bg-opacity-400"
+    <nav
+      class="sm:hidden menu-link top-0 absolute w-full bg-white backdrop-filter backdrop-blur-md bg-opacity-50 firefox:bg-opacity-400"
       :class="[isMenuOn ? 'show' : 'hide']"
     >
       <div class="px-5 pt-24 py-5 space-y-3 text-left font-bold text-2xl h-screen">
@@ -192,9 +183,8 @@
           >
         </div>
       </div>
-    </div>
-  </nav>
-  <!-- </transition> -->
+    </nav>
+  </header>
 </template>
 <script>
 export default {
@@ -343,16 +333,11 @@ export default {
   transform: translate3d(-100vw, 0, 0);
   overflow: hidden;
 }
-nav {
-  /* height: 60px;
-  width: 100vw;
-  background: hsl(200, 50%, 50%); */
-  /* position: fixed; */
-  /* box-shadow: 0 2px 15px rgba(71, 120, 120, 0.5); */
+.header-nav {
   transform: translate3d(0, 0, 0);
   transition: 0.1s all ease-out;
 }
-nav.navbar--hidden {
+.header-nav.navbar--hidden {
   box-shadow: none;
   transform: translate3d(0, -100%, 0);
 }
