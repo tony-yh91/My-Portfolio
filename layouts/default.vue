@@ -1,9 +1,11 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col min-h-screen dark-mode bg-white dark:bg-gray-900">
     <Navbar></Navbar>
-    <transition name="home">
-      <Nuxt />
-    </transition>
+    <main class="flex-grow">
+      <transition name="home">
+        <Nuxt />
+      </transition>
+    </main>
     <Footer />
   </div>
 </template>
@@ -27,6 +29,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+.dark-mode {
+  transition: background-color 0.5s;
 }
 
 *,

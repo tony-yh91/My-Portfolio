@@ -20,7 +20,11 @@ export default {
   css: ['~/assets/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    {
+      src: '~/plugins/datocms',
+    },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -31,10 +35,12 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/axios',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxt/http'],
+  modules: ['@nuxt/http', '@nuxtjs/axios'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -43,8 +49,22 @@ export default {
     },
   },
 
-  server: {
-    port: 80,
-    host: '0.0.0.0',
+  // server: {
+  //   port: 80,
+  //   host: '0.0.0.0',
+  // },
+
+  router: {
+    scrollBehavior() {
+      return { x: 0, y: 0 }
+    },
+  },
+
+  env: {
+    Dato_CMS_TOKEN: process.env.DATO_CMS_TOKEN,
+  },
+
+  loading: {
+    color: 'green',
   },
 }

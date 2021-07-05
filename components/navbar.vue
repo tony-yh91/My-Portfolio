@@ -1,7 +1,7 @@
 <template>
-  <header class="header-nav sticky top-0 z-10 bg-white" :class="{ 'navbar--hidden': !showNavbar }">
-    <div class="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
-      <div class="grid grid-flow-col grid-cols-2 md:grid-cols-4 mx-auto gap-3 sm:py-5 items-center">
+  <header class="header-nav sticky top-0 z-30" :class="{ 'navbar--hidden': !showNavbar }">
+    <div class="mx-auto max-w-6xl px-2 sm:px-6 dark-mode bg-white dark:bg-gray-900">
+      <div class="grid grid-flow-col grid-cols-2 md:grid-cols-3 mx-auto gap-3 sm:py-5 items-center">
         <div class="sm:hidden flex items-center">
           <!-- Mobile menu button-->
           <svg
@@ -12,23 +12,68 @@
             @click="isMenuOn = !isMenuOn"
           >
             <path
-              class="line top"
+              class="line dark:dark-line top"
               d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"
             />
-            <path class="line middle" d="m 30,50 h 40" />
+            <path class="line dark:dark-line middle" d="m 30,50 h 40" />
             <path
-              class="line bottom"
+              class="line dark:dark-line bottom"
               d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"
             />
           </svg>
           <!-- </button> -->
         </div>
         <div class="col-span-2">
-          <h2 class="font-black text-2xl hidden sm:block">
+          <h2 class="font-black text-2xl dark:text-white hidden sm:block">
             <NuxtLink href="#" to="/">Ye Htet Aung</NuxtLink>
           </h2>
         </div>
-        <nav class="hidden col-span-2 sm:block justify-self-end">
+        <div class="items-center sm:flex justify-self-end">
+          <button
+            v-if="darkMode"
+            class="px-3 py-2 focus:outline-none"
+            aria-label="Dark Mode"
+            @click="toggleTheme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 fill-current stroke-current text-yellow-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+          </button>
+
+          <button
+            v-else
+            class="px-3 py-2 focus:outline-none"
+            aria-label="Light Mode"
+            @click="toggleTheme"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 fill-current text-black"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              />
+            </svg>
+          </button>
+        </div>
+        <nav class="hidden items-center sm:flex justify-self-end">
           <!-- <div class="flex content-end"> -->
           <!-- <NuxtLink
               href="#"
@@ -37,29 +82,49 @@
               class="hover:text-green-600 px-3 py-2 rounded-md font-medium"
               >Home</NuxtLink
             > -->
-          <NuxtLink href="#" to="/" class="hover:text-green-600 px-3 py-2 rounded-md font-medium"
+          <!-- <NuxtLink
+            href="#"
+            to="/"
+            class="hover:text-green-600 dark:text-white px-3 py-2 rounded-md font-medium"
             >Blog</NuxtLink
-          >
+          > -->
 
-          <NuxtLink href="#" to="/" class="hover:text-green-600 px-3 py-2 rounded-md font-medium"
-            >Resume</NuxtLink
+          <!-- <button
+            type="button"
+            class="bg-transparent text-black text-sm py-2 px-4 rounded-md"
+            @click="toggleTheme"
+          >
+            Dark
+          </button> -->
+
+          <NuxtLink
+            href="#"
+            to="/"
+            class="hover:text-green-600 dark:text-white px-3 py-2 rounded-md font-medium"
+            >Projects</NuxtLink
           >
 
           <NuxtLink
             href="#"
             to="about"
-            exact-active-class="text-green-400"
-            class="hover:text-green-600 px-3 py-2 rounded-md font-medium"
+            exact-active-class="text-green-400 dark:text-green-500"
+            class="hover:text-green-600 dark:text-white px-3 py-2 rounded-md font-medium"
             >About</NuxtLink
           >
           <!-- </div> -->
         </nav>
-        <button
-          type="button"
-          class="focus:outline-none text-black text-sm py-2 px-4 rounded-md border-2 border-green-600 hover:shadow-xl"
+        <NuxtLink
+          href="#"
+          to="contact"
+          exact-active-class="bg-transparent border-transparent rounded-lg bg-green-600 text-white"
+          ><button
+            type="button"
+            class="bg-transparent dark:text-white font-semibold py-2 px-4 border-2 border-green-500 duration-300 rounded-lg hover:border-transparent hover:bg-green-600 hover:text-white text-base sm:text-base"
+          >
+            Contact me
+          </button></NuxtLink
         >
-          Contact me
-        </button>
+
         <!-- <div class="justify-self-end"> -->
         <!-- Profile dropdown -->
         <!-- <div class="ml-3 relative">
@@ -121,13 +186,13 @@
     </div>
     <!-- Mobile menu, show/hide based on menu state. -->
     <nav
-      class="sm:hidden menu-link top-0 absolute w-full bg-white backdrop-filter backdrop-blur-md bg-opacity-50 firefox:bg-opacity-400"
+      class="sm:hidden menu-link top-0 absolute w-full bg-whit backdrop-filter backdrop-blur-md bg-opacity-50 firefox:bg-opacity-400"
       :class="[isMenuOn ? 'show' : 'hide']"
     >
       <div class="px-5 pt-24 py-5 space-y-3 text-left font-bold text-2xl h-screen">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <div
-          class="menu-link"
+          class="menu-link dark:text-white"
           :class="[isMenuOn ? 'show' : 'hide']"
           style="transition: transform 0.5s"
         >
@@ -140,21 +205,7 @@
           >
         </div>
 
-        <div
-          class="menu-link"
-          :class="[isMenuOn ? 'show' : 'hide']"
-          style="transition: transform 0.6s"
-        >
-          <NuxtLink
-            href="#"
-            to="/"
-            exact-active-class="text-green-400"
-            class="block px-3 py-2 rounded-md"
-            >Blog</NuxtLink
-          >
-        </div>
-
-        <div
+        <!-- <div
           class="menu-link"
           :class="[isMenuOn ? 'show' : 'hide']"
           style="transition: transform 0.7s"
@@ -163,13 +214,13 @@
             href="#"
             to="/"
             exact-active-class="text-green-400"
-            class="block px-3 py-2 rounded-md"
+            class="block px-3 py-2 rounded-md dark:text-white"
             >Resume</NuxtLink
           >
-        </div>
+        </div> -->
 
         <div
-          class="menu-link"
+          class="menu-link dark:text-white"
           :class="[isMenuOn ? 'show' : 'hide']"
           style="transition: transform 0.8s"
         >
@@ -193,6 +244,7 @@ export default {
       isMenuOn: false,
       showNavbar: true,
       currentScroll: 0,
+      darkMode: false,
     }
   },
   watch: {
@@ -206,7 +258,18 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', this.onScroll, true)
-    // this.isScrollUp = true
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      localStorage.theme = 'dark'
+      document.documentElement.classList.add('dark')
+      this.darkMode = true
+    } else {
+      localStorage.theme = 'light'
+      document.documentElement.classList.remove('dark')
+      this.darkMode = false
+    }
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.onScroll, true)
@@ -222,6 +285,21 @@ export default {
       }
       this.showNavbar = scroll < this.currentScroll
       this.currentScroll = scroll
+    },
+    toggleTheme() {
+      this.darkMode = !this.darkMode
+      if (this.darkMode) {
+        // Whenever the user explicitly chooses dark mode
+        localStorage.theme = 'dark'
+        document.documentElement.classList.add('dark')
+      } else {
+        // Whenever the user explicitly chooses light mode
+        localStorage.theme = 'light'
+        document.documentElement.classList.remove('dark')
+      }
+
+      // // Whenever the user explicitly chooses to respect the OS preference
+      // localStorage.removeItem('theme')
     },
   },
 }
@@ -286,6 +364,9 @@ export default {
   stroke-width: 5.5;
   stroke-linecap: round;
 }
+.dark .dark\:dark-line {
+  stroke: #fff;
+}
 .ham1 .top {
   stroke-dasharray: 40 139;
 }
@@ -340,5 +421,8 @@ export default {
 .header-nav.navbar--hidden {
   box-shadow: none;
   transform: translate3d(0, -100%, 0);
+}
+.dark-mode {
+  transition: background-color 0.5s;
 }
 </style>
