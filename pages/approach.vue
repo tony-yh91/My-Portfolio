@@ -323,5 +323,10 @@ export default {
       ],
     }
   },
+  head() {
+    return {
+      title: `Approach - Ye Htet Aung`,
+    }
+  },
 }
 </script>

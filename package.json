@@ -13,9 +13,11 @@
   "dependencies": {
     "@nuxt/http": "^0.6.4",
     "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/toast": "^3.3.1",
     "@tailwindcss/forms": "^0.3.3",
     "@vue/composition-api": "^1.0.0-rc.11",
     "core-js": "^3.9.1",
+    "nodemailer": "^6.6.2",
     "nuxt": "^2.15.3",
     "vue-datocms": "^1.0.3"
   },

@@ -189,6 +189,11 @@ export default {
       data: null,
     }
   },
+  head() {
+    return {
+      title: `About - Ye Htet Aung`,
+    }
+  },
   computed: {
     reorderJobs() {
       return this.data.aboutPage.timelineJobs.slice().reverse()

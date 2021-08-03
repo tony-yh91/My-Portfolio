@@ -7,10 +7,10 @@
       class="mt-2 py-5 px-5 grid grid-rows-1 gap-2 gap-y-5 md:grid-flow-col md:gap-x-9 justify-items-center place-items-center"
     >
       <div class="col-span-2">
-        <img
+        <datocms-image
           class="h-40 w-40 md:w-44 md:h-44 rounded-full row-span-2 text-center col-span-2 ring-4 ring-offset-white dark:ring-offset-black ring-offset-4 ring-green-600"
-          src="../assets/profile-lowres.png"
-          alt="Profile picture"
+          :data="data.homePage.greetingPhoto.responsiveImage"
+          :alt="data.homePage.greetingPhoto.alt"
         />
       </div>
       <div class="w-full text-center md:text-left space-y-4 col-span-2 text-black dark:text-white">
@@ -60,54 +60,6 @@
             </p>
           </div>
         </div>
-        <!-- <div
-          class="px-2 py-5 card cursor-pointer text-left"
-          @mouseenter="addClass"
-          @mouseleave="removeClass"
-        >
-          <img src="../assets/sample.png" class="rounded-md h-56 card" />
-          <div
-            class="px-3 py-5 bg-white ml-10 border border-green-300 rounded-md -mt-28 relative lg:z-10 card"
-          >
-            <h2 class="text-2xl text-bold pb-3">Qualva Chat Bot</h2>
-            <p class="text-sm">
-              We are living the digital life. Even those who hate the internet and everything it
-              represents can’t deny the fact that this is the time and age of digitization.
-            </p>
-          </div>
-        </div>
-        <div
-          class="px-2 py-5 card cursor-pointer text-left"
-          @mouseenter="addClass"
-          @mouseleave="removeClass"
-        >
-          <img src="../assets/sample.png" class="rounded-md h-56 card" />
-          <div
-            class="px-3 py-5 bg-white ml-10 border border-green-300 rounded-md -mt-28 relative z-10 card"
-          >
-            <h2 class="text-2xl text-bold pb-3">Qualva Chat Bot</h2>
-            <p class="text-sm">
-              We are living the digital life. Even those who hate the internet and everything it
-              represents can’t deny the fact that this is the time and age of digitization.
-            </p>
-          </div>
-        </div>
-        <div
-          class="px-2 py-5 card cursor-pointer text-left"
-          @mouseenter="addClass"
-          @mouseleave="removeClass"
-        >
-          <img src="../assets/sample.png" class="rounded-md h-56 card" />
-          <div
-            class="px-3 py-5 bg-white ml-10 border border-green-300 rounded-md -mt-28 relative z-10 card"
-          >
-            <h2 class="text-2xl text-bold pb-3">Qualva Chat Bot</h2>
-            <p class="text-sm">
-              We are living the digital life. Even those who hate the internet and everything it
-              represents can’t deny the fact that this is the time and age of digitization.
-            </p>
-          </div>
-        </div> -->
       </div>
     </section>
     <!-- Work Together -->
@@ -143,6 +95,7 @@ export default {
           greetingHeader
           greetingDescription
           greetingPhoto {
+            alt
             responsiveImage(imgixParams: {auto: enhance}) {
               aspectRatio
               alt
@@ -151,6 +104,7 @@ export default {
               sizes
               src
               srcSet
+              webpSrcSet
               title
               width
             }
@@ -191,6 +145,11 @@ export default {
       cardHover: false,
     }
   },
+  head() {
+    return {
+      title: 'Home - Ye Htet Aung',
+    }
+  },
   methods: {
     addClass(e) {
       if (!e.target.children[0].classList.contains('card-image-transition')) {
@@ -209,11 +168,6 @@ export default {
 </script>
 
 <style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
 .card {
   transition: transform 0.5s;
 }
@@ -230,10 +184,8 @@ export default {
   display: block;
   content: '';
   padding-top: calc(100% * 2 / 3);
-  /* You could reduce this expression with a preprocessor or by doing the math. I've kept the longer form in `calc()` to make the math more readable for this demo. */
 }
 .profile-img {
-  /* width: 100%; */
   margin: 0 0 1rem;
   box-sizing: border-box;
 }

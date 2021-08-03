@@ -13,12 +13,14 @@
       </p>
       <form class="space-y-5">
         <input
+          v-model="name"
           type="text"
           name="senderName"
           placeholder="Name"
           class="focus:ring-green-500 focus:border-green-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300"
         />
         <input
+          v-model="email"
           type="text"
           name="senderEmail"
           placeholder="Email"
@@ -26,13 +28,16 @@
         />
         <textarea
           id="senderBody"
+          v-model="description"
           name="senderBody"
           rows="3"
           class="shadow-sm focus:ring-green-500 focus:border-green-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
           placeholder="Please describe your detail."
         ></textarea>
         <button
+          type="button"
           class="bg-green-300 font-bold py-2 px-4 rounded-md hover:shadow-xl text-black hover:bg-green-500"
+          @click="sendMail"
         >
           Send
         </button>
@@ -42,5 +47,76 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      name: '',
+      email: '',
+      description: '',
+    }
+  },
+  head() {
+    return {
+      title: `Contact - Ye Htet Aung`,
+    }
+  },
+  methods: {
+    sendMail() {
+      this.$nuxt.$loading.start()
+      this.$axios
+        .post('https://yehtetaung.netlify.app/.netlify/functions/sendmail ', {
+          name: this.name,
+          email: this.email,
+          description: this.description,
+        })
+        .then((response) => {
+          this.$nuxt.$loading.finish()
+          if (response.status === 200) {
+            this.$toast.success('Email sent.', {
+              duration: 3000,
+            })
+          } else {
+            this.$toast.error(
+              'Sorry! Unable to send email right now. Could you plese contact me by clicking this?',
+              {
+                action: [
+                  {
+                    text: 'Link',
+                    href: 'mailto:ygxan18@gmail.com?subject=Hello',
+                  },
+                  {
+                    icon: 'CLOSE',
+                    onClick: (e, toastObject) => {
+                      toastObject.goAway(0)
+                    },
+                  },
+                ],
+              }
+            )
+          }
+        })
+        // eslint-disable-next-line node/handle-callback-err
+        .catch((error) => {
+          this.$nuxt.$loading.finish()
+          this.$toast.error(
+            'Sorry! Unable to send email right now. Could you plese contact me by clicking this?',
+            {
+              action: [
+                {
+                  text: 'Link',
+                  href: 'mailto:ygxan18@gmail.com?subject=Hello',
+                },
+                {
+                  icon: 'CLOSE',
+                  onClick: (e, toastObject) => {
+                    toastObject.goAway(0)
+                  },
+                },
+              ],
+            }
+          )
+        })
+    },
+  },
+}
 </script>

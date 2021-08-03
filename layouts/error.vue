@@ -7,7 +7,7 @@
       <a
         :href="
           'mailto:' +
-          'ygxan18@gmail.com.com?subject=I found a broken link!&body=Hey Wes,%0D%0A%0D%0AI found a broken link on your site. The page was supposed to be at' +
+          'ygxan18@gmail.com?subject=I found a broken link!&body=Hey YeHtet,%0D%0A%0D%0AI found a broken link on your site. The page was supposed to be at' +
           ' ' +
           'yehtetaung.dev' +
           currentURL
