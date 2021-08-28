@@ -1,84 +1,218 @@
 <template>
-  <div
-    class="container xl:max-w-6xl lg:max-w-4xl md:max-w-2xl sm:max-w-xl max-w-lg xl:mx-auto space-y-10"
-  >
+  <div class="w-11/12 max-w-5xl mx-auto px-1">
     <!-- Introduction -->
-    <section
-      class="mt-2 py-5 px-5 grid grid-rows-1 gap-2 gap-y-5 md:grid-flow-col md:gap-x-9 justify-items-center place-items-center"
-    >
-      <div class="col-span-2">
+    <section class="flex flex-col-reverse md:flex-row items-center md:items-start md:mt-5">
+      <div class="text-center md:text-left space-y-4 mt-8 md:mt-0 md:mr-8">
+        <h2 class="text-2xl font-bold">
+          {{ data.homePage.greetingHeader }}
+        </h2>
+        <div class="flex space-x-3 w-full justify-center md:justify-start">
+          <a
+            v-for="(image, index) in data.homePage.contactSocialMedia"
+            :key="index"
+            target="_blank"
+            :aria-label="image.alt"
+            rel="noopener"
+          >
+            <datocms-image
+              :data="image.responsiveImage"
+              class="social-btn"
+              :alt="image.alt"
+              lazy-load
+            />
+          </a>
+        </div>
+        <p class="text-base md:text-lg font-light tracking-wide leading-loose">
+          Javascript Engineer at Professy.
+          {{ data.homePage.greetingDescription }}
+        </p>
+        <NuxtLink
+          href="#"
+          to="about"
+          class="
+            relative
+            top-6
+            rounded
+            px-5
+            py-2.5
+            overflow-hidden
+            group
+            text-textSecondary
+            bg-buttonPrimary
+            hover:ring-2
+            hover:ring-offset-2
+            hover:ring-offset-backgroundPrimary
+            hover:ring-buttonPrimary
+            transition-all
+            ease-out
+            duration-300
+          "
+        >
+          <span>About me</span>
+        </NuxtLink>
+      </div>
+      <div class="md:mr-5">
         <datocms-image
-          class="h-40 w-40 md:w-44 md:h-44 rounded-full row-span-2 text-center col-span-2 ring-4 ring-offset-white dark:ring-offset-black ring-offset-4 ring-green-600"
+          class="
+            h-40
+            w-40
+            sm:w-60 sm:h-60
+            rounded-full
+            text-center
+            ring-4 ring-offset-backgroundPrimary ring-offset-4 ring-buttonPrimary
+          "
           :data="data.homePage.greetingPhoto.responsiveImage"
           :alt="data.homePage.greetingPhoto.alt"
         />
       </div>
-      <div class="w-full text-center md:text-left space-y-4 col-span-2 text-black dark:text-white">
-        <h2 class="text-3xl md:text-4xl font-bold">
-          {{ data.homePage.greetingHeader }}
-        </h2>
-        <p class="text-lg">
-          {{ data.homePage.greetingDescription }}
-        </p>
-        <button
-          type="button"
-          class="bg-green-300 font-bold py-2 px-4 rounded-md hover:shadow-xl text-black hover:bg-green-500"
-        >
-          <NuxtLink href="#" to="about">About Me</NuxtLink>
-        </button>
-      </div>
     </section>
     <!-- Projects -->
-    <section class="px-2 py-5 space-y-3">
-      <h3
-        class="text-lg text-center md:text-left text-green-800 dark:text-green-500 font-semibold uppercase"
-      >
-        {{ data.homePage.projectContentHeader }}
-      </h3>
-      <h3 class="text-3xl text-center md:text-left dark:text-white md:text-4xl font-bold">
+    <section class="mt-10">
+      <h3 class="text-xl md:text-2xl font-bold tracking-tight ml-2">
         {{ data.homePage.projectContentDescription }}
       </h3>
-      <div class="grid md:grid-cols-2 gap-3">
+      <div
+        class="
+          flex flex-col
+          md:flex-row
+          justify-center
+          items-center
+          space-x-0
+          md:space-x-5
+          space-y-5
+          md:space-y-0
+          mt-5
+        "
+      >
         <div
           v-for="proj in data.homePage.projects"
           :key="proj.id"
-          class="md:w-11/12 px-2 py-5 card cursor-pointer text-left"
-          @mouseenter="addClass"
-          @mouseleave="removeClass"
+          class="
+            glass-card
+            px-4
+            py-4
+            text-textPrimary
+            space-y-5
+            transform
+            transition
+            duration-500
+            hover:shadow-lg
+            cursor-pointer
+          "
         >
           <datocms-image
             :data="proj.projectImage.responsiveImage"
-            class="border border-green-300 rounded-md card dark:dark-card"
+            class="rounded-lg transform transition duration-500 hover:scale-105"
             :alt="proj.projectImage.alt"
           />
-          <div
-            class="px-3 py-5 w-11/12 ml-4 md:w-full bg-white dark:bg-gray-900 md:ml-10 border border-green-300 rounded-md -mt-16 md:-mr-6 relative lg:z-10 card"
+          <h3 class="text-lg font-bold">{{ proj.title }}</h3>
+          <p class="text-sm md:text-base font-light">
+            {{ proj.subtitle }}
+          </p>
+          <button
+            class="
+              flex
+              rounded
+              px-1
+              py-1.5
+              overflow-hidden
+              text-buttonPrimary text-sm
+              font-extralight
+              hover:text-buttonPrimaryHover
+              ml-auto
+            "
           >
-            <h2 class="text-2xl text-bold pb-3 text-black dark:text-white">{{ proj.title }}</h2>
-            <p class="text-sm text-black dark:text-white">
-              {{ proj.subtitle }}
-            </p>
+            <NuxtLink href="#" to="contact"> More </NuxtLink>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="mt-10">
+      <h3 class="text-xl md:text-2xl font-bold tracking-tight">Latest Articles</h3>
+      <div class="flex flex-col sm:flex-row space-y-7 sm:space-y-0 mt-4">
+        <div class="px-1 py-1 group cursor-pointer">
+          <h1 class="text-lg md:text-xl font-bold group-hover:text-textNavPrimary">
+            How I built my blog
+          </h1>
+          <div class="font-extralight text-sm mt-3 space-x-3">
+            <span>#Javascript</span><span>#WebDev</span>
+          </div>
+          <p class="mt-3 text-base md:text-lg font-light tracking-wide leading-loose">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam at rerum in doloribus
+            velit suscipit libero excepturi beatae tempore, repudiandae dolor tempora debitis
+            perspiciatis mollitia eum facere natus omnis voluptas.
+          </p>
+          <div class="font-extralight text-sm mt-3">
+            <span>Aug 23</span> . <span></span>23 min read
+          </div>
+        </div>
+        <div class="px-1 py-1">
+          <h1 class="text-lg md:text-xl font-bold hover:text-textNavPrimary cursor-pointer">
+            How I built my blog
+          </h1>
+          <div class="font-extralight text-sm mt-3 space-x-3">
+            <span>#Javascript</span><span>#WebDev</span>
+          </div>
+          <p class="mt-3 text-base md:text-lg font-light tracking-wide leading-loose">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam at rerum in doloribus
+            velit suscipit libero excepturi beatae tempore, repudiandae dolor tempora debitis
+            perspiciatis mollitia eum facere natus omnis voluptas.
+          </p>
+          <div class="font-extralight text-sm mt-3">
+            <span>Aug 23</span> . <span></span>23 min read
           </div>
         </div>
       </div>
     </section>
-    <!-- Work Together -->
-    <section class="px-5 py-5 space-y-3 text-center md:text-left">
-      <h3 class="text-lg text-green-800 dark:text-green-500 font-semibold uppercase">
-        {{ data.homePage.approachHeader }}
-      </h3>
-      <h3 class="text-3xl md:text-4xl dark:text-white font-bold">
-        {{ data.homePage.approachDescription }}
-      </h3>
-      <p class="text-lg dark:text-white md:w-3/4 pb-5">
-        {{ data.homePage.approachText }}
-      </p>
-      <button
-        type="button"
-        class="bg-green-300 font-bold text-black py-2 px-4 rounded-md hover:shadow-xl hover:bg-green-500"
+    <!-- Contact card -->
+    <section class="mt-10">
+      <div
+        class="
+          px-5
+          py-5
+          grid
+          md:grid-cols-3
+          gap-3
+          place-items-center
+          rounded-lg
+          shadow-lg
+          bg-backgroundSecondary
+        "
       >
-        <NuxtLink to="/approach">My approach</NuxtLink>
-      </button>
+        <div class="md:col-span-2 space-y-7">
+          <h3 class="text-lg md:text-xl font-bold">Want to hire me?</h3>
+          <p class="mt-3 mb-3 text-sm md:text-base font-light">
+            Feel free to reach out to me anytime if you're looking for a developer, have a question,
+            or just want to connect.
+          </p>
+          <button
+            class="
+              rounded
+              px-5
+              py-2.5
+              overflow-hidden
+              text-textSecondary
+              bg-buttonPrimary
+              hover:ring-2
+              hover:ring-offset-2
+              hover:ring-buttonPrimary
+              hover:ring-offset-backgroundPrimary
+              transition-all
+              ease-out
+              duration-300
+            "
+          >
+            <NuxtLink href="#" to="contact"> Let's win together </NuxtLink>
+          </button>
+        </div>
+        <div class="p-3 flex justify-center row-start-1 md:row-start-auto">
+          <datocms-image
+            :data="data.homePage.contactPhoto.responsiveImage"
+            :alt="data.homePage.contactPhoto.responsiveImage.alt"
+            lazy-load
+          />
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -90,51 +224,77 @@ export default {
   async asyncData({ $axios, error }) {
     const data = await request({
       query: `
-      {
-        homePage {
-          greetingHeader
-          greetingDescription
-          greetingPhoto {
-            alt
-            responsiveImage(imgixParams: {auto: enhance}) {
-              aspectRatio
+        {
+          homePage {
+            greetingHeader
+            greetingDescription
+            greetingPhoto {
               alt
-              base64
-              height
-              sizes
-              src
-              srcSet
-              webpSrcSet
-              title
-              width
+              responsiveImage(imgixParams: { auto: enhance }) {
+                aspectRatio
+                alt
+                base64
+                height
+                sizes
+                src
+                srcSet
+                webpSrcSet
+                title
+                width
+              }
             }
-          }
-          projectContentHeader
-          projectContentDescription
-          projects {
-            id
-            title
-            subtitle
-            projectImage {
-              alt
-              responsiveImage(imgixParams: {fit: crop, ar: "16:9", auto: enhance}) {
+            contactSocialMedia {
+              responsiveImage(imgixParams: { fit: crop, auto: enhance, w: 30, h: 30 }) {
+                base64
+                aspectRatio
+                alt
+                height
+                sizes
                 src
                 srcSet
                 title
                 width
+              }
+            }
+            projectContentHeader
+            projectContentDescription
+            projects {
+              id
+              title
+              subtitle
+              projectImage {
+                alt
+                responsiveImage(imgixParams: { ar: "16:9", auto: enhance }) {
+                  src
+                  srcSet
+                  title
+                  width
+                  alt
+                  aspectRatio
+                  base64
+                  height
+                  sizes
+                }
+              }
+            }
+            contactHeader
+            contactDescription
+            contactPhoto {
+              responsiveImage(imgixParams: { auto: enhance }) {
                 alt
                 aspectRatio
                 base64
                 height
                 sizes
+                src
+                srcSet
+                title
+                width
               }
             }
           }
-          approachHeader
-          approachDescription
-          approachText
         }
-      }`,
+      `,
       axios: $axios,
       error,
     })
@@ -150,43 +310,8 @@ export default {
       title: 'Home - Ye Htet Aung',
     }
   },
-  methods: {
-    addClass(e) {
-      if (!e.target.children[0].classList.contains('card-image-transition')) {
-        e.target.children[0].classList.add('card-image-transition')
-        e.target.children[1].classList.add('card-description-transition')
-      }
-    },
-    removeClass(e) {
-      if (e.target.children[0].classList.contains('card-image-transition')) {
-        e.target.children[0].classList.remove('card-image-transition')
-        e.target.children[1].classList.remove('card-description-transition')
-      }
-    },
-  },
+  // beforeMount() {
+  //   this.$colorMode.preference = 'system'
+  // },
 }
 </script>
-
-<style>
-.card {
-  transition: transform 0.5s;
-}
-.dark .dark\:dark-card {
-  filter: brightness(0.8) contrast(1.2);
-}
-.card-image-transition {
-  transform: translate(-15px, -15px);
-}
-.card-description-transition {
-  transform: translate(15px, 15px);
-}
-.profile-::before {
-  display: block;
-  content: '';
-  padding-top: calc(100% * 2 / 3);
-}
-.profile-img {
-  margin: 0 0 1rem;
-  box-sizing: border-box;
-}
-</style>

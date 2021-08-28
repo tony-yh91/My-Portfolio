@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen dark-mode bg-white dark:bg-gray-900">
+  <div class="flex flex-col min-h-screen">
     <Navbar></Navbar>
     <main class="flex-grow">
       <transition name="home">
@@ -17,18 +17,3 @@ export default {
   components: { Navbar, Footer },
 }
 </script>
-
-<style>
-.dark-mode {
-  transition: background-color 0.5s;
-}
-
-.home-enter-active,
-.home-leave-active {
-  transition: opacity 1s;
-}
-.home-enter,
-.home-leave-active {
-  opacity: 0;
-}
-</style>

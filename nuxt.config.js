@@ -60,6 +60,7 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/axios',
     '@nuxtjs/toast',
+    '@nuxtjs/color-mode',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -87,7 +88,5 @@ export default {
     Dato_CMS_TOKEN: process.env.DATO_CMS_TOKEN,
   },
 
-  loading: {
-    color: 'green',
-  },
+  loading: false,
 }

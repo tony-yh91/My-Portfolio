@@ -18,7 +18,15 @@
     </p>
     <button
       type="button"
-      class="bg-green-300 font-bold text-black py-2 px-4 rounded-md hover:shadow-xl hover:bg-green-500"
+      class="
+        bg-green-300
+        font-bold
+        text-black
+        py-2
+        px-4
+        rounded-md
+        hover:shadow-xl hover:bg-green-500
+      "
     >
       <NuxtLink to="/">Back to home</NuxtLink>
     </button>

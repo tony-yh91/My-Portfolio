@@ -1,13 +1,8 @@
 <template>
-  <div
-    class="container xl:max-w-6xl lg:max-w-4xl md:max-w-2xl sm:max-w-xl max-w-lg xl:mx-auto space-y-10"
-  >
-    <section class="px-5 py-5 flex flex-col">
-      <div class="space-y-3">
-        <h3 class="text-lg text-green-800 font-semibold uppercase">Contact me</h3>
-        <h3 class="text-3xl dark:text-white md:text-4xl font-bold">Let's talk about this</h3>
-      </div>
-      <p class="py-5 dark:text-white">
+  <div class="w-11/12 max-w-5xl mx-auto px-1">
+    <section class="flex flex-col">
+      <h3 class="text-xl md:text-2xl font-bold tracking-tight">Contact me</h3>
+      <p class="py-5 text-base md:text-lg font-light">
         Interested to discuss with me for your valuable project? May be just a question? I would
         love to hear from you.
       </p>
@@ -17,26 +12,41 @@
           type="text"
           name="senderName"
           placeholder="Name"
-          class="focus:ring-green-500 focus:border-green-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300"
+          class="shadow-sm p-2 w-full rounded-md sm:text-sm border border-borderSecondary"
         />
         <input
           v-model="email"
           type="text"
           name="senderEmail"
           placeholder="Email"
-          class="focus:ring-green-500 focus:border-green-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300"
+          class="shadow-sm p-2 w-full rounded-md sm:text-sm border border-borderSecondary"
         />
         <textarea
           id="senderBody"
           v-model="description"
           name="senderBody"
           rows="3"
-          class="shadow-sm focus:ring-green-500 focus:border-green-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+          class="shadow-sm p-2 w-full rounded-md sm:text-sm border border-borderSecondary"
           placeholder="Please describe your detail."
         ></textarea>
         <button
           type="button"
-          class="bg-green-300 font-bold py-2 px-4 rounded-md hover:shadow-xl text-black hover:bg-green-500"
+          class="
+            rounded
+            px-5
+            py-2.5
+            overflow-hidden
+            group
+            text-textSecondary
+            bg-buttonPrimary
+            hover:ring-2
+            hover:ring-offset-2
+            hover:ring-offset-backgroundPrimary
+            hover:ring-buttonPrimary
+            transition-all
+            ease-out
+            duration-300
+          "
           @click="sendMail"
         >
           Send
@@ -62,7 +72,6 @@ export default {
   },
   methods: {
     sendMail() {
-      this.$nuxt.$loading.start()
       this.$axios
         .post('https://yehtetaung.netlify.app/.netlify/functions/sendmail ', {
           name: this.name,
@@ -70,7 +79,6 @@ export default {
           description: this.description,
         })
         .then((response) => {
-          this.$nuxt.$loading.finish()
           if (response.status === 200) {
             this.$toast.success('Email sent.', {
               duration: 3000,
@@ -97,7 +105,6 @@ export default {
         })
         // eslint-disable-next-line node/handle-callback-err
         .catch((error) => {
-          this.$nuxt.$loading.finish()
           this.$toast.error(
             'Sorry! Unable to send email right now. Could you plese contact me by clicking this?',
             {

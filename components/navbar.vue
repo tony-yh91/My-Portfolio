@@ -1,43 +1,34 @@
 <template>
-  <header class="header-nav sticky top-0 z-30" :class="{ 'navbar--hidden': !showNavbar }">
-    <div class="mx-auto max-w-6xl px-2 sm:px-6 dark-mode bg-white dark:bg-gray-900">
-      <div class="grid grid-flow-col grid-cols-2 md:grid-cols-3 mx-auto gap-3 sm:py-5 items-center">
-        <div class="sm:hidden flex items-center">
-          <!-- Mobile menu button-->
-          <svg
-            class="ham hamRotate ham1"
-            viewBox="0 0 100 100"
-            width="80"
-            :class="isMenuOn ? 'active' : ''"
-            @click="isMenuOn = !isMenuOn"
-          >
-            <path
-              class="line dark:dark-line top"
-              d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"
-            />
-            <path class="line dark:dark-line middle" d="m 30,50 h 40" />
-            <path
-              class="line dark:dark-line bottom"
-              d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"
-            />
-          </svg>
-          <!-- </button> -->
-        </div>
-        <div class="col-span-2">
-          <h2 class="font-black text-2xl dark:text-white hidden sm:block">
-            <NuxtLink href="#" to="/">Ye Htet Aung</NuxtLink>
-          </h2>
-        </div>
-        <div class="items-center sm:flex justify-self-end">
+  <header
+    class="
+      sticky
+      z-30
+      top-0
+      p-2
+      sm:p-3
+      mb-5
+      backdrop-filter backdrop-blur-lg
+      border-b
+      bg-opacity-10
+      border-borderPrimary
+      transition
+    "
+  >
+    <nav class="mx-auto flex items-center w-11/12 max-w-5xl">
+      <h2 class="hidden sm:block font-black text-2xl">
+        <NuxtLink href="#" to="/">Ye Htet Aung</NuxtLink>
+      </h2>
+      <div class="flex justify-between items-center w-full sm:w-max sm:ml-auto">
+        <div class="mr-2">
           <button
             v-if="darkMode"
-            class="px-3 py-2 focus:outline-none"
+            class="p-2 bg-iconPrimary rounded-md"
             aria-label="Dark Mode"
             @click="toggleTheme"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 fill-current stroke-current text-yellow-300"
+              class="h-6 w-6 fill-current text-textSecondary"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -52,14 +43,14 @@
           </button>
 
           <button
-            v-else
-            class="px-3 py-2 focus:outline-none"
+            v-if="!darkMode"
+            class="p-2 bg-iconPrimary rounded-md"
             aria-label="Light Mode"
             @click="toggleTheme"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 fill-current text-black"
+              class="h-6 w-6 fill-current text-textPrimary"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -67,130 +58,81 @@
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
+                stroke-width="1"
                 d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
               />
             </svg>
           </button>
         </div>
-        <nav class="hidden items-center sm:flex justify-self-end">
-          <!-- <div class="flex content-end"> -->
-          <!-- <NuxtLink
-              href="#"
-              to="/"
-              exact-active-class="text-green-400"
-              class="hover:text-green-600 px-3 py-2 rounded-md font-medium"
-              >Home</NuxtLink
-            > -->
-          <!-- <NuxtLink
-            href="#"
-            to="/"
-            class="hover:text-green-600 dark:text-white px-3 py-2 rounded-md font-medium"
-            >Blog</NuxtLink
-          > -->
-
-          <!-- <button
-            type="button"
-            class="bg-transparent text-black text-sm py-2 px-4 rounded-md"
-            @click="toggleTheme"
-          >
-            Dark
-          </button> -->
-
+        <div>
           <NuxtLink
             href="#"
             to="/"
-            class="hover:text-green-600 dark:text-white px-3 py-2 rounded-md font-medium"
+            exact-active-class="text-textNavPrimary"
+            class="hover:text-textNavPrimary px-1 sm:px-3 py-2 rounded-md font-light text-base"
+            >Home</NuxtLink
+          >
+          <NuxtLink
+            href="#"
+            to="/"
+            exact-active-class="text-textNavPrimary"
+            class="hover:text-textNavPrimary px-1 sm:px-3 py-2 rounded-md font-light text-base"
             >Projects</NuxtLink
           >
-
+          <NuxtLink
+            href="#"
+            to="/"
+            exact-active-class="text-textNavPrimary"
+            class="hover:text-textNavPrimary px-1 sm:px-3 py-2 rounded-md font-light text-base"
+            >Blog</NuxtLink
+          >
           <NuxtLink
             href="#"
             to="about"
-            exact-active-class="text-green-400 dark:text-green-500"
-            class="hover:text-green-600 dark:text-white px-3 py-2 rounded-md font-medium"
+            exact-active-class="text-textNavPrimary"
+            class="hover:text-textNavPrimary px-1 sm:px-3 py-2 rounded-md font-light text-base"
             >About</NuxtLink
           >
-          <!-- </div> -->
-        </nav>
-        <NuxtLink
-          href="#"
-          to="contact"
-          exact-active-class="bg-transparent border-transparent rounded-lg bg-green-600 text-white"
-          ><button
-            type="button"
-            class="bg-transparent dark:text-white font-semibold py-2 px-4 border-2 border-green-500 duration-300 rounded-lg hover:border-transparent hover:bg-green-600 hover:text-white text-base sm:text-base"
-          >
-            Contact me
-          </button></NuxtLink
-        >
-
-        <!-- <div class="justify-self-end"> -->
-        <!-- Profile dropdown -->
-        <!-- <div class="ml-3 relative">
-              <div>
-                <button
-                  id="user-menu"
-                  type="button"
-                  class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  @click="isOn = !isOn"
-                >
-                  <span class="sr-only">Open user menu</span>
-                  <img
-                    class="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </button>
-              </div>
-              <transition
-                enter-active-class="transition ease-out duration-100"
-                enter-class="transform opacity-0 scale-95"
-                enter-to-class="transform opacity-100 scale-100"
-                leave-active-class="transition ease-in duration-75"
-                leave-class="transform opacity-100 scale-100"
-                leave-to-class="transform opacity-0 scale-95"
-              >
-                <div
-                  v-show="isOn"
-                  class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="user-menu"
-                >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                    >Your Profile</a
-                  >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                    >Settings</a
-                  >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                    >Sign out</a
-                  >
-                </div>
-              </transition>
-            </div> -->
-        <!-- </div> -->
+        </div>
       </div>
-    </div>
+      <!-- <NuxtLink
+            href="#"
+            to="contact"
+            class="
+              bg-transparent
+              dark:text-white
+              font-semibold
+              py-2
+              px-4
+              border-2 border-green-500
+              duration-300
+              rounded-lg
+              hover:border-transparent hover:bg-green-600 hover:text-white
+              text-sm
+              sm:text-base
+            "
+            exact-active-class="bg-transparent border-transparent rounded-lg bg-green-600 text-white"
+            >Contact me</NuxtLink
+          > -->
+      <!-- </div> -->
+    </nav>
+    <!-- </div> -->
     <!-- Mobile menu, show/hide based on menu state. -->
-    <nav
-      class="sm:hidden menu-link top-0 absolute w-full bg-whit backdrop-filter backdrop-blur-md bg-opacity-50 firefox:bg-opacity-400"
+    <!-- <nav
+      class="
+        sm:hidden
+        menu-link
+        top-0
+        absolute
+        w-full
+        bg-whit
+        backdrop-filter backdrop-blur-md
+        bg-opacity-50
+        firefox:bg-opacity-400
+      "
       :class="[isMenuOn ? 'show' : 'hide']"
     >
       <div class="px-5 pt-24 py-5 space-y-3 text-left font-bold text-2xl h-screen">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <div
           class="menu-link dark:text-white"
           :class="[isMenuOn ? 'show' : 'hide']"
@@ -204,21 +146,6 @@
             >Home</NuxtLink
           >
         </div>
-
-        <!-- <div
-          class="menu-link"
-          :class="[isMenuOn ? 'show' : 'hide']"
-          style="transition: transform 0.7s"
-        >
-          <NuxtLink
-            href="#"
-            to="/"
-            exact-active-class="text-green-400"
-            class="block px-3 py-2 rounded-md dark:text-white"
-            >Resume</NuxtLink
-          >
-        </div> -->
-
         <div
           class="menu-link dark:text-white"
           :class="[isMenuOn ? 'show' : 'hide']"
@@ -234,7 +161,7 @@
           >
         </div>
       </div>
-    </nav>
+    </nav> -->
   </header>
 </template>
 <script>
@@ -247,59 +174,15 @@ export default {
       darkMode: false,
     }
   },
-  watch: {
-    isMenuOn(value) {
-      if (this.isMenuOn) {
-        document.body.style.overflow = 'hidden'
-      } else {
-        document.body.style.overflow = 'auto'
-      }
-    },
-  },
   mounted() {
-    window.addEventListener('scroll', this.onScroll, true)
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      localStorage.theme = 'dark'
-      document.documentElement.classList.add('dark')
+    if (document.documentElement.className === 'dark-mode') {
       this.darkMode = true
-    } else {
-      localStorage.theme = 'light'
-      document.documentElement.classList.remove('dark')
-      this.darkMode = false
     }
   },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll, true)
-  },
   methods: {
-    onScroll(e) {
-      const scroll = window.scrollY
-      if (scroll < 0) {
-        return
-      }
-      if (Math.abs(scroll - this.currentScroll) < 60) {
-        return
-      }
-      this.showNavbar = scroll < this.currentScroll
-      this.currentScroll = scroll
-    },
     toggleTheme() {
       this.darkMode = !this.darkMode
-      if (this.darkMode) {
-        // Whenever the user explicitly chooses dark mode
-        localStorage.theme = 'dark'
-        document.documentElement.classList.add('dark')
-      } else {
-        // Whenever the user explicitly chooses light mode
-        localStorage.theme = 'light'
-        document.documentElement.classList.remove('dark')
-      }
-
-      // // Whenever the user explicitly chooses to respect the OS preference
-      // localStorage.removeItem('theme')
+      this.$colorMode.preference = this.darkMode ? 'dark' : 'light'
     },
   },
 }
@@ -348,7 +231,7 @@ export default {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  padding: 10px;
+  padding: 5px;
   z-index: 10001;
 }
 .hamRotate.active {
@@ -422,7 +305,7 @@ export default {
   box-shadow: none;
   transform: translate3d(0, -100%, 0);
 }
-.dark-mode {
+.dark-mode-transition {
   transition: background-color 0.5s;
 }
 </style>

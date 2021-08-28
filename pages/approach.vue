@@ -1,7 +1,19 @@
 <template>
   <div
     v-if="data"
-    class="container mt-10 xl:max-w-6xl lg:max-w-4xl md:max-w-2xl sm:max-w-xl max-w-lg xl:mx-auto space-y-5 xl:px-4 divide-y divide-grey-200"
+    class="
+      container
+      mt-10
+      xl:max-w-6xl
+      lg:max-w-4xl
+      md:max-w-2xl
+      sm:max-w-xl
+      max-w-lg
+      xl:mx-auto
+      space-y-5
+      xl:px-4
+      divide-y divide-grey-200
+    "
   >
     <section class="px-5 py-5 space-y-10">
       <div class="grid lg:grid-cols-2 gap-5">
@@ -22,20 +34,22 @@
           </div>
         </div>
         <div class="px-5 py-5">
-          <datocms-image
+          <!-- <datocms-image
             :data="data.approachPage.articleImage.responsiveImage"
             :alt="data.approachPage.articleImage.responsiveImage.alt"
-          />
+          /> -->
+          <img src="@/assets/frontend.svg" alt="" />
         </div>
       </div>
     </section>
     <section class="px-5 py-5 space-y-10">
       <div class="grid lg:grid-cols-2 gap-5">
         <div class="px-5 py-5">
-          <datocms-image
+          <!-- <datocms-image
             :data="data.approachPage.articleImageCopy1.responsiveImage"
             :alt="data.approachPage.articleImageCopy1.responsiveImage.alt"
-          />
+          /> -->
+          <img src="@/assets/jamstack.svg" alt="" />
         </div>
         <div class="space-y-3 max-w-2xl">
           <h3 class="text-lg text-green-500 font-semibold uppercase">
@@ -82,10 +96,11 @@
           </div>
         </div>
         <div class="px-5 py-5">
-          <datocms-image
+          <!-- <datocms-image
             :data="data.approachPage.articleImageCopy2.responsiveImage"
             :alt="data.approachPage.articleImageCopy2.responsiveImage.alt"
-          />
+          /> -->
+          <img src="@/assets/backend.svg" alt="" />
         </div>
       </div>
     </section>
@@ -116,71 +131,22 @@
             </p>
           </div>
         </div>
-        <!-- <div class="flex">
-          <div class="bg-neutral-muted rounded-lg p-4 w-20 h-20 grid">
-            <img src="../assets/search-outline.svg" alt="review" class="" />
-          </div>
-          <div class="px-3 py-3">
-            <h3 class="text-2xl mb-4">Website Review</h3>
-            <p>
-              I make sure your website is performing its best by thoroughly reviewing it before
-              making any changes.
-            </p>
-          </div>
-        </div>
-        <div class="flex">
-          <div class="bg-neutral-muted rounded-lg p-4 w-20 h-20 grid">
-            <img src="../assets/search-outline.svg" alt="review" class="" />
-          </div>
-          <div class="px-3 py-3">
-            <h3 class="text-2xl mb-4">Website Review</h3>
-            <p>
-              I make sure your website is performing its best by thoroughly reviewing it before
-              making any changes.
-            </p>
-          </div>
-        </div>
-        <div class="flex">
-          <div class="bg-neutral-muted rounded-lg p-4 w-20 h-20 grid">
-            <img src="../assets/search-outline.svg" alt="review" class="" />
-          </div>
-          <div class="px-3 py-3">
-            <h3 class="text-2xl mb-4">Website Review</h3>
-            <p>
-              I make sure your website is performing its best by thoroughly reviewing it before
-              making any changes.
-            </p>
-          </div>
-        </div>
-        <div class="flex">
-          <div class="bg-neutral-muted rounded-lg p-4 w-20 h-20 grid">
-            <img src="../assets/search-outline.svg" alt="review" class="" />
-          </div>
-          <div class="px-3 py-3">
-            <h3 class="text-2xl mb-4">Website Review</h3>
-            <p>
-              I make sure your website is performing its best by thoroughly reviewing it before
-              making any changes.
-            </p>
-          </div>
-        </div>
-        <div class="flex">
-          <div class="bg-neutral-muted rounded-lg p-4 w-20 h-20 grid">
-            <img src="../assets/search-outline.svg" alt="review" class="" />
-          </div>
-          <div class="px-3 py-3">
-            <h3 class="text-2xl mb-4">Website Review</h3>
-            <p>
-              I make sure your website is performing its best by thoroughly reviewing it before
-              making any changes.
-            </p>
-          </div>
-        </div> -->
       </div>
     </section>
     <section class="px-5 py-5 space-y-10">
       <div
-        class="px-5 py-5 border rounded-md shadow-sm grid lg:grid-cols-3 gap-3 bg-green-400 place-items-center"
+        class="
+          px-5
+          py-5
+          border
+          rounded-md
+          shadow-sm
+          grid
+          lg:grid-cols-3
+          gap-3
+          bg-green-400
+          place-items-center
+        "
       >
         <div class="p-3 lg:col-span-2">
           <h3 class="text-3xl font-bold text-left">{{ data.approachPage.contactHeader }}</h3>
@@ -189,7 +155,16 @@
           </p>
           <button
             type="button"
-            class="focus:outline-none text-white text-sm py-2 px-4 rounded-md bg-black border-2 border-black hover:shadow-xl"
+            class="
+              focus:outline-none
+              text-white text-sm
+              py-2
+              px-4
+              rounded-md
+              bg-black
+              border-2 border-black
+              hover:shadow-xl
+            "
           >
             <NuxtLink to="contact">Let's win together</NuxtLink>
           </button>
