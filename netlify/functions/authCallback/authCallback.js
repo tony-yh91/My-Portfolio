@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-export const callbackHandler = async (payload) => {
+const callbackHandler = async (payload) => {
   try {
     if (payload.error) {
       throw new Error('Spotify auth error')
@@ -25,3 +25,5 @@ export const callbackHandler = async (payload) => {
     }
   }
 }
+
+module.exports = { callbackHandler }
