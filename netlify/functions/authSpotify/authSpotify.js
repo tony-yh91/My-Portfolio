@@ -11,6 +11,10 @@ const authSpotify = async () => {
         scope: 'user-read-currently-playing',
       },
     })
+    return {
+      statusCode: 200,
+      body: 'Authorize request sent!',
+    }
   } catch (error) {
     return {
       statusCode: 400,
