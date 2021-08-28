@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const authSpotify = async () => {
+const handler = async () => {
   try {
     const url = 'https://accounts.spotify.com/authorize'
     await axios.get(url, {
@@ -23,4 +23,4 @@ const authSpotify = async () => {
   }
 }
 
-module.exports = { authSpotify }
+module.exports = { handler }
