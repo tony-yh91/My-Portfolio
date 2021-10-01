@@ -77,7 +77,7 @@ export default {
   },
 
   env: {
-    Dato_CMS_TOKEN: process.env.DATO_CMS_TOKEN,
+    NETLIFY_FUNCTION_URL: process.env.NETLIFY_FUNCTION_URL,
   },
 
   loading: false,
