@@ -70,7 +70,7 @@ export default {
       this.$axios({
         method: 'POST',
         url: '/sendmail',
-        baseURL: process.env.NETLIFY_BASE_URL,
+        baseURL: process.env.NETLIFY_FUNCTION_URL,
         data: {
           name: this.name,
           email: this.email,
