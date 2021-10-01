@@ -19,7 +19,8 @@
             rounded-md
             sm:text-sm
             border border-borderSecondary
-            text-textSecondary
+            bg-backgroundPrimary
+            text-textPrimary
           "
         />
         <input
@@ -34,7 +35,8 @@
             rounded-md
             sm:text-sm
             border border-borderSecondary
-            text-textSecondary
+            bg-backgroundPrimary
+            text-textPrimary
           "
         />
         <textarea
@@ -49,7 +51,8 @@
             rounded-md
             sm:text-sm
             border border-borderSecondary
-            text-textSecondary
+            bg-backgroundPrimary
+            text-textPrimary
           "
           placeholder="Please describe your detail."
         ></textarea>
