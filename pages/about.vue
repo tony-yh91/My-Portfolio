@@ -92,7 +92,7 @@
       <div class="flex flex-col">
         <p class="text-sm tracking-tight">
           This section is created with Netlify serverless function that will keep tracking on
-          recently played songs of my Spotify account.
+          recently played songs of my spotify account.
         </p>
         <div class="glass-card items-center flex gap-2 mt-5 py-2 pl-2 max-w-sm">
           <!-- <svg
@@ -203,7 +203,7 @@ export default {
     async spotifyRecentlyPlayed() {
       try {
         const response = await this.$axios.post(
-          `${process.env.BASE_URL}/.netlify/functions/SpotifyRecentSongs`
+          `${process.env.HOST_URL}/.netlify/functions/SpotifyRecentSongs`
         )
         if (response.data.items) {
           this.bindMusic(response.data.items)
@@ -219,7 +219,7 @@ export default {
     async spotifyRefreshToken() {
       try {
         const response = await this.$axios.post(
-          `${process.env.BASE_URL}/.netlify/functions/SpotifyRefreshToken`
+          `${process.env.HOST_URL}/.netlify/functions/SpotifyRefreshToken`
         )
         if (response.status === 200) {
           this.spotifyRecentlyPlayed()
