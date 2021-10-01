@@ -198,7 +198,6 @@ export default {
     // )
     // console.log(response)
     this.spotifyRecentlyPlayed()
-    console.log(process.env.BASE_URL)
   },
   methods: {
     async spotifyRecentlyPlayed() {
