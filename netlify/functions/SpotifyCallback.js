@@ -18,7 +18,10 @@ exports.handler = async (payload) => {
     const params = new URLSearchParams()
     params.append('grant_type', 'authorization_code')
     params.append('code', code)
-    params.append('redirect_uri', `${process.env.HOST_URL}/.netlify/functions/SpotifyCallback`)
+    params.append(
+      'redirect_uri',
+      `https://yehtetaung.netlify.app/.netlify/functions/SpotifyCallback`
+    )
     const config = {
       headers: {
         'Content-type': 'application/x-www-form-urlencoded',
