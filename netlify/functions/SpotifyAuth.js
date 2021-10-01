@@ -5,7 +5,7 @@ const handler = () => {
     authURL.searchParams.append('response_type', 'code')
     authURL.searchParams.append(
       'redirect_uri',
-      `${process.env.BASE_URL}/.netlify/functions/SpotifyCallback`
+      `${process.env.HOST_URL}/.netlify/functions/SpotifyCallback`
     )
     authURL.searchParams.append('scope', 'user-read-recently-played')
     return { statusCode: 200, body: authURL.href }

@@ -1,6 +1,6 @@
 const axios = require('axios')
 const { createClient } = require('@supabase/supabase-js')
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SECRET_KEY)
+const supabase = createClient(process.env.SUPAHOST_URL, process.env.SUPABASE_SECRET_KEY)
 
 exports.handler = async (payload) => {
   try {
@@ -18,7 +18,7 @@ exports.handler = async (payload) => {
     const params = new URLSearchParams()
     params.append('grant_type', 'authorization_code')
     params.append('code', code)
-    params.append('redirect_uri', `${process.env.BASE_URL}/.netlify/functions/SpotifyCallback`)
+    params.append('redirect_uri', `${process.env.HOST_URL}/.netlify/functions/SpotifyCallback`)
     const config = {
       headers: {
         'Content-type': 'application/x-www-form-urlencoded',

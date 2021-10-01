@@ -194,7 +194,7 @@ export default {
   },
   mounted() {
     // const response = await this.$axios.post(
-    //   `${process.env.BASE_URL}/.netlify/functions/SpotifyAuth`
+    //   `${process.env.HOST_URL}/.netlify/functions/SpotifyAuth`
     // )
     // console.log(response)
     this.spotifyRecentlyPlayed()
