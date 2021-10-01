@@ -12,21 +12,45 @@
           type="text"
           name="senderName"
           placeholder="Name"
-          class="shadow-sm p-2 w-full rounded-md sm:text-sm border border-borderSecondary"
+          class="
+            shadow-sm
+            p-2
+            w-full
+            rounded-md
+            sm:text-sm
+            border border-borderSecondary
+            text-textSecondary
+          "
         />
         <input
           v-model="email"
           type="text"
           name="senderEmail"
           placeholder="Email"
-          class="shadow-sm p-2 w-full rounded-md sm:text-sm border border-borderSecondary"
+          class="
+            shadow-sm
+            p-2
+            w-full
+            rounded-md
+            sm:text-sm
+            border border-borderSecondary
+            text-textSecondary
+          "
         />
         <textarea
           id="senderBody"
           v-model="description"
           name="senderBody"
           rows="3"
-          class="shadow-sm p-2 w-full rounded-md sm:text-sm border border-borderSecondary"
+          class="
+            shadow-sm
+            p-2
+            w-full
+            rounded-md
+            sm:text-sm
+            border border-borderSecondary
+            text-textSecondary
+          "
           placeholder="Please describe your detail."
         ></textarea>
         <button

@@ -13,7 +13,7 @@ const handler = async (event) => {
         refreshToken: process.env.OAUTH_REFRESH_TOKEN,
       },
     })
-    const body = event.body
+    const body = JSON.parse(event.body)
     const mailOptions = {
       from: process.env.MAIL_USERNAME,
       to: process.env.MAIL_USERNAME,
@@ -26,9 +26,10 @@ const handler = async (event) => {
       body: 'Email sent!',
     }
   } catch (error) {
+    console.log(error)
     return {
       statusCode: 400,
-      body: error,
+      body: 'cannot send email',
     }
   }
 }
