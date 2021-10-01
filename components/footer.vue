@@ -4,7 +4,7 @@
       <nav class="space-y-5 w-1/2">
         <h2 class="font-bold uppercase">Pages</h2>
         <ul class="flex flex-col items-start cursor-pointer">
-          <NuxtLink href="#" to="about">
+          <NuxtLink href="#" to="blog">
             <li class="hover:text-buttonPrimaryHover py-1">Blog</li>
           </NuxtLink>
           <NuxtLink href="#" to="about">
@@ -89,18 +89,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.social-btn {
-  /*
-      All of the base styles have
-      moved to the “CSS” tab above.
-    */
-  transition: transform 250ms;
-  cursor: pointer;
-}
-
-.social-btn:hover {
-  transform: translateY(-8px);
-}
-</style>

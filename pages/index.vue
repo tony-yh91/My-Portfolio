@@ -11,6 +11,7 @@
             v-for="(image, index) in data.homePage.contactSocialMedia"
             :key="index"
             target="_blank"
+            :href="image.customData.link"
             :aria-label="image.alt"
             rel="noopener"
           >
@@ -127,40 +128,59 @@
         </div>
       </div>
     </section>
+    <!-- Blogs -->
     <section class="mt-10">
       <h3 class="text-xl md:text-2xl font-bold tracking-tight">Latest Articles</h3>
-      <div class="flex flex-col sm:flex-row space-y-7 sm:space-y-0 mt-4">
-        <div class="px-1 py-1 group cursor-pointer">
-          <h1 class="text-lg md:text-xl font-bold group-hover:text-textNavPrimary">
-            How I built my blog
-          </h1>
-          <div class="font-extralight text-sm mt-3 space-x-3">
-            <span>#Javascript</span><span>#WebDev</span>
-          </div>
-          <p class="mt-3 text-base md:text-lg font-light tracking-wide leading-loose">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam at rerum in doloribus
-            velit suscipit libero excepturi beatae tempore, repudiandae dolor tempora debitis
-            perspiciatis mollitia eum facere natus omnis voluptas.
-          </p>
-          <div class="font-extralight text-sm mt-3">
-            <span>Aug 23</span> . <span></span>23 min read
-          </div>
-        </div>
-        <div class="px-1 py-1">
-          <h1 class="text-lg md:text-xl font-bold hover:text-textNavPrimary cursor-pointer">
-            How I built my blog
-          </h1>
-          <div class="font-extralight text-sm mt-3 space-x-3">
-            <span>#Javascript</span><span>#WebDev</span>
-          </div>
-          <p class="mt-3 text-base md:text-lg font-light tracking-wide leading-loose">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam at rerum in doloribus
-            velit suscipit libero excepturi beatae tempore, repudiandae dolor tempora debitis
-            perspiciatis mollitia eum facere natus omnis voluptas.
-          </p>
-          <div class="font-extralight text-sm mt-3">
-            <span>Aug 23</span> . <span></span>23 min read
-          </div>
+      <div
+        class="
+          flex flex-col
+          md:flex-row
+          justify-center
+          items-center
+          space-x-0
+          md:space-x-5
+          space-y-5
+          md:space-y-0
+          mt-5
+        "
+      >
+        <div
+          v-for="post in data.allPosts"
+          :key="post.slug"
+          class="
+            glass-card
+            px-4
+            py-4
+            text-textPrimary
+            transform
+            transition
+            duration-500
+            hover:shadow-lg
+            cursor-pointer
+            group
+          "
+        >
+          <nuxt-link :to="'blog/' + post.slug">
+            <div class="space-y-5">
+              <datocms-image
+                :data="post.previewImage.responsiveImage"
+                class="rounded-lg transform transition duration-500 hover:scale-105"
+                :alt="post.previewImage.alt"
+              />
+              <h1 class="text-lg md:text-xl font-bold group-hover:text-textNavPrimary">
+                {{ post.title }}
+              </h1>
+              <div class="font-extralight text-sm mt-3 space-x-3">
+                <span>#{{ post.category.name }}</span>
+              </div>
+              <p class="mt-3 text-base md:text-lg font-light tracking-wide leading-loose">
+                {{ post.excerpt }}
+              </p>
+              <div class="font-extralight text-sm mt-3 text-textNavPrimary">
+                <span>{{ $moment(post.publishedDate).format('MMMM D YYYY') }}</span>
+              </div>
+            </div>
+          </nuxt-link>
         </div>
       </div>
     </section>
@@ -218,6 +238,7 @@
 </template>
 
 <script>
+import { toHead } from 'vue-datocms'
 import { request } from '../lib/datocms'
 
 export default {
@@ -225,7 +246,47 @@ export default {
     const data = await request({
       query: `
         {
+          site: _site {
+            favicon: faviconMetaTags {
+              attributes
+              content
+              tag
+            }
+          }
+          allPosts(first: "2", orderBy: _firstPublishedAt_DESC) {
+            id
+            title
+            slug
+            excerpt
+            publishedDate: _firstPublishedAt
+            previewImage {
+              responsiveImage(imgixParams: { auto: enhance, h: 500 }){
+                src
+                srcSet
+                title
+                width
+                alt
+                aspectRatio
+                base64
+                height
+                sizes
+              }
+            }
+            author {
+              name
+              _firstPublishedAt
+            }
+            category {
+              name
+              slug
+            }
+          }
           homePage {
+            seo: _seoMetaTags {
+              attributes
+              content
+              tag
+            }
             greetingHeader
             greetingDescription
             greetingPhoto {
@@ -244,6 +305,7 @@ export default {
               }
             }
             contactSocialMedia {
+              customData
               responsiveImage(imgixParams: { fit: crop, auto: enhance, w: 30, h: 30 }) {
                 base64
                 aspectRatio
@@ -306,12 +368,10 @@ export default {
     }
   },
   head() {
-    return {
-      title: 'Home - Ye Htet Aung',
+    if (!this || !this.data) {
+      return
     }
+    return toHead(this.data.homePage.seo, this.data.site.favicon)
   },
-  // beforeMount() {
-  //   this.$colorMode.preference = 'system'
-  // },
 }
 </script>

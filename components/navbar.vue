@@ -81,14 +81,14 @@
           >
           <NuxtLink
             href="#"
-            to="/"
-            exact-active-class="text-textNavPrimary"
+            to="/blog"
+            active-class="text-textNavPrimary"
             class="hover:text-textNavPrimary px-1 sm:px-3 py-2 rounded-md font-light text-base"
             >Blog</NuxtLink
           >
           <NuxtLink
             href="#"
-            to="about"
+            to="/about"
             exact-active-class="text-textNavPrimary"
             class="hover:text-textNavPrimary px-1 sm:px-3 py-2 rounded-md font-light text-base"
             >About</NuxtLink

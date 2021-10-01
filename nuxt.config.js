@@ -1,6 +1,6 @@
-import createSEOMeta from './utils/seo'
+// import createSEOMeta from './utils/seo'
 
-const meta = createSEOMeta()
+// const meta = createSEOMeta()
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -13,29 +13,11 @@ export default {
       lang: 'en',
     },
     meta: [
-      ...meta,
       { charset: 'utf-8' },
       { name: 'HandheldFriendly', content: 'True' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { property: 'og:site_name', content: 'Ye Htet Aung' },
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'A full-stack web developer',
-      },
-      { property: 'og:image:width', content: '740' },
-      { property: 'og:image:height', content: '300' },
-      { name: 'twitter:site', content: '@TonyYehtet99' },
-      { name: 'twitter:card', content: 'summary_large_image' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
-      {
-        hid: 'canonical',
-        rel: 'canonical',
-        href: 'https://yehtetaung.netlify.app',
-      },
-    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -61,10 +43,20 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/toast',
     '@nuxtjs/color-mode',
+    '@nuxtjs/moment',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxt/http', '@nuxtjs/axios'],
+  modules: [
+    '@nuxt/http',
+    '@nuxtjs/axios',
+    [
+      'nuxt-highlightjs',
+      {
+        style: 'atom-one-dark',
+      },
+    ],
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
