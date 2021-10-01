@@ -13,7 +13,7 @@ const handler = async (event) => {
         refreshToken: process.env.OAUTH_REFRESH_TOKEN,
       },
     })
-    const body = JSON.parse(event.body)
+    const body = event.body
     const mailOptions = {
       from: process.env.MAIL_USERNAME,
       to: process.env.MAIL_USERNAME,

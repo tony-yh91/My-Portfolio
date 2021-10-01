@@ -198,12 +198,13 @@ export default {
     // )
     // console.log(response)
     this.spotifyRecentlyPlayed()
+    console.log(process.env.BASE_URL)
   },
   methods: {
     async spotifyRecentlyPlayed() {
       try {
         const response = await this.$axios.post(
-          `${process.env.HOST_URL}/.netlify/functions/SpotifyRecentSongs`
+          `https://yehtetaung.netlify.app/.netlify/functions/SpotifyRecentSongs`
         )
         if (response.data.items) {
           this.bindMusic(response.data.items)
@@ -219,7 +220,7 @@ export default {
     async spotifyRefreshToken() {
       try {
         const response = await this.$axios.post(
-          `${process.env.HOST_URL}/.netlify/functions/SpotifyRefreshToken`
+          `https://yehtetaung.netlify.app/.netlify/functions/SpotifyRefreshToken`
         )
         if (response.status === 200) {
           this.spotifyRecentlyPlayed()
