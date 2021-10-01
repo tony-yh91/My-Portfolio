@@ -65,19 +65,18 @@ export default {
       description: '',
     }
   },
-  head() {
-    return {
-      title: `Contact - Ye Htet Aung`,
-    }
-  },
   methods: {
     sendMail() {
-      this.$axios
-        .post('https://yehtetaung.netlify.app/.netlify/functions/sendmail ', {
+      this.$axios({
+        method: 'POST',
+        url: '/sendmail',
+        baseURL: process.env.NETLIFY_BASE_URL,
+        data: {
           name: this.name,
           email: this.email,
           description: this.description,
-        })
+        },
+      })
         .then((response) => {
           if (response.status === 200) {
             this.$toast.success('Email sent.', {
