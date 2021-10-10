@@ -182,14 +182,8 @@ export default {
       return this.data.aboutPage.timelineJobs.slice().reverse()
     },
   },
-  async mounted() {
-    const response = await this.$axios({
-      method: 'POST',
-      url: '/SpotifyAuth',
-      baseURL: 'https://yehtetaung.netlify.app/.netlify/functions',
-    })
-    console.log(response)
-    // this.spotifyCurrentlyPlaying()
+  mounted() {
+    this.spotifyCurrentlyPlaying()
   },
   methods: {
     async spotifyCurrentlyPlaying() {
