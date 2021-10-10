@@ -182,8 +182,13 @@ export default {
       return this.data.aboutPage.timelineJobs.slice().reverse()
     },
   },
-  mounted() {
-    this.spotifyCurrentlyPlaying()
+  async mounted() {
+    const response = await this.$axios({
+      method: 'POST',
+      url: 'https://yehtetaung.netlify.app/.netlify/functions/SpotifyCurrentTrack',
+    })
+    console.log(response)
+    // this.spotifyCurrentlyPlaying()
   },
   methods: {
     async spotifyCurrentlyPlaying() {
