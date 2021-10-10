@@ -20,7 +20,7 @@ exports.handler = async (payload) => {
     params.append('code', code)
     params.append(
       'redirect_uri',
-      `https://yehtetaung-56243f.netlify.live/.netlify/functions/SpotifyCallback`
+      `https://yehtetaung.netlify.app/.netlify/functions/SpotifyCallback`
     )
     const config = {
       headers: {
