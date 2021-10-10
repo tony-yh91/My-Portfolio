@@ -100,7 +100,8 @@
             <div v-if="track">
               <div class="uppercase">{{ track.title }}</div>
               <div>{{ track.artist }}</div>
-              <div>Recently played at {{ track.played_at }}</div>
+              <div v-if="track.isPlaying">Playing on {{ track.device }}</div>
+              <div v-else>Recently played at {{ track.played_at }}</div>
             </div>
             <div v-else>Not Playing</div>
           </div>
@@ -182,18 +183,19 @@ export default {
     },
   },
   mounted() {
-    this.spotifyRecentlyPlayed()
+    this.spotifyCurrentlyPlaying()
   },
   methods: {
-    async spotifyRecentlyPlayed() {
+    async spotifyCurrentlyPlaying() {
       try {
         const response = await this.$axios({
           method: 'POST',
-          url: '/SpotifyRecentSongs',
+          url: '/SpotifyCurrentTrack',
           baseURL: process.env.NETLIFY_FUNCTION_URL,
         })
-        if (response.data.items) {
-          this.bindMusic(response.data.items)
+        // console.log(response)
+        if (response.data) {
+          this.bindMusic(response.data)
         }
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -218,13 +220,14 @@ export default {
         console.error(error)
       }
     },
-    bindMusic(items) {
-      const track = items[0]
+    bindMusic(track) {
       this.track = {
-        artist: track.track.artists[0].name,
-        title: track.track.name,
-        album_art: track.track.album.images[2].url,
-        played_at: this.$moment(track.played_at).format('dddd hh:mm A'),
+        artist: track.item.artists[0].name,
+        title: track.item.name,
+        isPlaying: track.is_playing,
+        device: track.device.type === 'Computer' ? "Tony's Macbook Air" : track.device.name,
+        album_art: track.item.album.images[1].url,
+        played_at: this.$moment(track.timestamp).format('dddd hh:mm A'),
       }
     },
   },

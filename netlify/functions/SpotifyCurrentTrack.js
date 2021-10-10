@@ -17,14 +17,14 @@ exports.handler = async () => {
       }
     }
     const token = data[0].value
-    const url = 'https://api.spotify.com/v1/me/player/recently-played'
+    const url = 'https://api.spotify.com/v1/me/player'
     const config = {
-      params: { limit: 1 },
+      params: { market: 'US' },
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
-    // get recently played songs with token from supabase
+    // get current playing song with token from supabase
     const response = await axios.get(url, config)
     if (response.status !== 200) {
       return {
