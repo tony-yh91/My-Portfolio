@@ -185,7 +185,8 @@ export default {
   async mounted() {
     const response = await this.$axios({
       method: 'POST',
-      url: 'https://yehtetaung.netlify.app/.netlify/functions/SpotifyAuth',
+      url: '/SpotifyAuth',
+      baseURL: 'https://yehtetaung.netlify.app/.netlify/functions',
     })
     console.log(response)
     // this.spotifyCurrentlyPlaying()
