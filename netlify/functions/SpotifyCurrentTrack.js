@@ -5,18 +5,14 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SEC
 exports.handler = async () => {
   try {
     // get access_token form supabase
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('Auth')
       .select('value')
       .filter('name', 'eq', 'Spotify')
       .filter('type', 'eq', 'access_token')
-    if (error) {
-      return {
-        statusCode: 400,
-        body: 'Cannot get token from supabase',
-      }
-    }
     const token = data[0].value
+
+    // get current playing song with token from supabase
     const url = 'https://api.spotify.com/v1/me/player'
     const config = {
       params: { market: 'US' },
@@ -24,23 +20,17 @@ exports.handler = async () => {
         Authorization: `Bearer ${token}`,
       },
     }
-    // get current playing song with token from supabase
     const response = await axios.get(url, config)
-    if (response.status !== 200) {
-      return {
-        statusCode: response.status,
-        body: response.message,
-      }
-    }
     return {
       statusCode: 200,
       body: JSON.stringify(response.data),
     }
   } catch (error) {
-    console.log(error)
-    return {
-      statusCode: 500,
-      body: 'Something wrong',
+    console.error('error', error)
+    const errorObj = {
+      statusCode: error.response ? error.response.statusCode : 500,
+      body: error.response ? error.response.statusText : error.message,
     }
+    return errorObj
   }
 }

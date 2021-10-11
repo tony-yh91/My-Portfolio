@@ -18,10 +18,7 @@ exports.handler = async (payload) => {
     const params = new URLSearchParams()
     params.append('grant_type', 'authorization_code')
     params.append('code', code)
-    params.append(
-      'redirect_uri',
-      `https://yehtetaung.netlify.app/.netlify/functions/SpotifyCallback`
-    )
+    params.append('redirect_uri', `${process.env.NETLIFY_FUNCTION_URL}/SpotifyCallback`)
     const config = {
       headers: {
         'Content-type': 'application/x-www-form-urlencoded',
@@ -29,30 +26,20 @@ exports.handler = async (payload) => {
       },
     }
     const response = await axios.post(url, params, config)
-    if (response.status !== 200) {
-      throw new Error('error getting current track')
-    }
-    console.log(response.data)
     // Insert to supabase
-    const { data, error } = await supabase.from('Auth').insert([
+    await supabase.from('Auth').insert([
       { name: 'Spotify', type: 'access_token', value: response.data.access_token },
       { name: 'Spotify', type: 'refresh_token', value: response.data.refresh_token },
     ])
-    if (error) {
-      return {
-        statusCode: 400,
-        body: 'Cannot save to supabase',
-      }
-    }
-    if (data) {
-      return {
-        statusCode: 200,
-      }
+    return {
+      statusCode: 200,
     }
   } catch (error) {
-    return {
-      statusCode: 400,
-      body: 'Spotify callback error',
+    console.error('error', error)
+    const errorObj = {
+      statusCode: error.response ? error.response.statusCode : 500,
+      body: error.response ? error.response.statusText : error.message,
     }
+    return errorObj
   }
 }

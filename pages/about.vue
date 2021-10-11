@@ -213,7 +213,7 @@ export default {
           baseURL: process.env.NETLIFY_FUNCTION_URL,
         })
         if (response.status === 200) {
-          this.spotifyRecentlyPlayed()
+          this.spotifyCurrentlyPlaying()
         }
       } catch (error) {
         // eslint-disable-next-line no-console

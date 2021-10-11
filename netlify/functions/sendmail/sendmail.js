@@ -26,11 +26,12 @@ const handler = async (event) => {
       body: 'Email sent!',
     }
   } catch (error) {
-    console.log(error)
-    return {
-      statusCode: 400,
-      body: 'cannot send email',
+    console.error('error', error)
+    const errorObj = {
+      statusCode: error.response ? error.response.statusCode : 500,
+      body: error.response ? error.response.statusText : error.message,
     }
+    return errorObj
   }
 }
 
