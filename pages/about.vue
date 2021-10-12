@@ -92,7 +92,7 @@
       <div class="flex flex-col">
         <p class="text-sm tracking-tight">
           This section is created with Netlify serverless function that will keep tracking on
-          recently played songs of my spotify account.
+          currently playing songs of my spotify account.
         </p>
         <div class="glass-card items-center flex gap-2 mt-5 py-2 pl-2 max-w-sm">
           <img v-if="track" :src="track.album_art" width="64" height="64" class="rounded-md" />
@@ -194,15 +194,18 @@ export default {
           baseURL: process.env.NETLIFY_FUNCTION_URL,
         })
         // console.log(response)
-        if (response.data) {
+        if (response.data && response.data.statusCode === 200) {
           this.bindMusic(response.data)
+        }
+        if (response.data && response.data.statusCode === 401) {
+          this.spotifyRefreshToken()
         }
       } catch (error) {
         // eslint-disable-next-line no-console
         console.log(error)
-        if (error.response.status === 401) {
-          this.spotifyRefreshToken()
-        }
+        // if (error.response.status === 401) {
+        //   this.spotifyRefreshToken()
+        // }
       }
     },
     async spotifyRefreshToken() {
