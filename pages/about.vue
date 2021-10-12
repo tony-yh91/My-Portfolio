@@ -194,18 +194,15 @@ export default {
           baseURL: process.env.NETLIFY_FUNCTION_URL,
         })
         // console.log(response)
-        if (response.data && response.data.statusCode === 200) {
+        if (response.data && response.data.status === 200) {
           this.bindMusic(response.data)
-        }
-        if (response.data && response.data.statusCode === 401) {
-          this.spotifyRefreshToken()
         }
       } catch (error) {
         // eslint-disable-next-line no-console
         console.log(error)
-        // if (error.response.status === 401) {
-        //   this.spotifyRefreshToken()
-        // }
+        if (error.response && error.response.status === 401) {
+          this.spotifyRefreshToken()
+        }
       }
     },
     async spotifyRefreshToken() {
