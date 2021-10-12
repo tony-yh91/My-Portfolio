@@ -194,7 +194,7 @@ export default {
           baseURL: process.env.NETLIFY_FUNCTION_URL,
         })
         // console.log(response)
-        if (response.data && response.data.status === 200) {
+        if (response.status === 200) {
           this.bindMusic(response.data)
         }
       } catch (error) {
