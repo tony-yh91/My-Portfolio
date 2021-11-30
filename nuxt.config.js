@@ -76,9 +76,9 @@ export default {
     },
   },
 
-  // env: {
-  //   NETLIFY_FUNCTION_URL: process.env.NETLIFY_FUNCTION_URL,
-  // },
+  env: {
+    NETLIFY_FUNCTION_URL: process.env.NETLIFY_FUNCTION_URL,
+  },
 
   loading: false,
 }

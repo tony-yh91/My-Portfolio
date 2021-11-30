@@ -13,9 +13,6 @@ module.exports = {
       bgBorder: 'var(--glass-card-color)',
     },
   },
-  // corePlugins: {
-  //   listStyleType: false,
-  // },
   variants: {},
   // plugins: [
   //   plugin(function ({ addVariant, e, postcss }) {

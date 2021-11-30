@@ -19,6 +19,7 @@
             rounded-md
             sm:text-sm
             border border-primary
+            focus:outline-none
             bg-bg
             text-textPrimary
           "
@@ -35,6 +36,7 @@
             rounded-md
             sm:text-sm
             border border-primary
+            focus:outline-none
             bg-bg
             text-textPrimary
           "
@@ -51,6 +53,7 @@
             rounded-md
             sm:text-sm
             border border-primary
+            focus:outline-none
             bg-bg
             text-textPrimary
           "
