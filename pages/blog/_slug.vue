@@ -1,25 +1,27 @@
 <template>
   <div class="w-11/12 max-w-3xl mx-auto px-1 space-y-3">
-    <div class="font-extralight text-sm space-x-3">
-      <span>#{{ data.post.category.name }}</span>
+    <div class="flex space-x-3">
+      <div v-for="category in post.category" :key="category.id" class="font-extralight text-sm">
+        #{{ category.name }}
+      </div>
     </div>
     <h1 class="text-3xl md:text-4xl font-bold tracking-tight">
-      {{ data.post.title }}
+      {{ post.title }}
     </h1>
     <div class="font-extralight text-base space-y-1">
       <div>
-        By <span class="font-bold">{{ data.post.author.name }}</span> •
-        {{ $moment(data.post.publishedDate).format('MMM D YYYY') }} • {{ readingTime }} minute read
+        By <span class="font-bold">{{ post.author.name }}</span> •
+        {{ $moment(post.publishedDate).format('MMM D YYYY') }} • {{ readingTime }} minute read
       </div>
     </div>
-    <p ref="article">
+    <div ref="article">
       <datocms-structured-text
         class="space-y-5 text-lg"
-        :data="data.post.content"
+        :data="post.content"
         :render-block="renderBlock"
         :custom-rules="customRules"
       />
-    </p>
+    </div>
     <div class="px-3 py-3 flex flex-col justify-center items-center space-y-4 max-w-xs mx-auto">
       <span class="w-52 border-t max-w-full border-borderSecondary pb-6"></span>
       <h4 class="font-semibold text-base text-center">You can send your feedback to me</h4>
@@ -30,15 +32,14 @@
           px-5
           py-2.5
           overflow-hidden
-          text-textPrimary
-          border border-buttonPrimary
-          hover:bg-buttonPrimary hover:text-textSecondary
+          border border-primary
+          hover:bg-primary hover:text-buttonColor
           transition-all
           ease-out
           duration-300
         "
       >
-        <a href="#">
+        <a href="https://twitter.com/TonyYe99" target="_blank">
           Chat me on
           <svg
             aria-hidden="true"
@@ -63,31 +64,27 @@
 <script>
 import { h } from 'vue-demi'
 import { renderRule, toHead } from 'vue-datocms'
-import { isHeading, isCode } from 'datocms-structured-text-utils'
+import { isHeading, isCode, isList, isLink } from 'datocms-structured-text-utils'
 import SyntaxHighlight from '@/components/SyntaxHighlight'
-import { request } from '../../lib/datocms'
+import { request, gql, imageFields, seoMetaTagsFields } from '../../lib/datocms'
 
 export default {
   components: {
     // eslint-disable-next-line vue/no-unused-components
     'syntax-highlight': SyntaxHighlight,
   },
-  async asyncData({ params, $axios, error }) {
+  async asyncData({ params }) {
     const data = await request({
-      query: `
-        query BlogPostQuery($slug: String!) {
+      query: gql`
+        {
           site: _site {
             favicon: faviconMetaTags {
-              attributes
-              content
-              tag
+              ...seoMetaTagsFields
             }
           }
-          post(filter: {slug: {eq: $slug }}) {
+          post(filter: {slug: {eq: "${params.slug}" }}) {
             seo: _seoMetaTags {
-              attributes
-              content
-              tag
+              ...seoMetaTagsFields
             }
             id
             title
@@ -98,6 +95,7 @@ export default {
               name
             }
             category {
+              id
               name
             }
             content {
@@ -107,17 +105,8 @@ export default {
                 ... on ImageBlockRecord {
                   id
                   image {
-                    responsiveImage(imgixParams: {auto: enhance}) {
-                      srcSet
-                      webpSrcSet
-                      sizes
-                      src
-                      width
-                      height
-                      aspectRatio
-                      alt
-                      title
-                      base64
+                    responsiveImage(imgixParams: {fm: jpg, q: 60, fit: crop, w: 500, h: 350}) {
+                      ...imageFields
                     }
                   }
                 }
@@ -125,14 +114,14 @@ export default {
             }
           }
         }
+        ${imageFields}
+        ${seoMetaTagsFields}
       `,
       variables: {
         slug: params.slug,
       },
-      axios: $axios,
-      error,
     })
-    return { data }
+    return { ready: !!data, ...data }
   },
   data() {
     return {
@@ -154,6 +143,16 @@ export default {
             []
           )
         }),
+        renderRule(isList, ({ adapter: { renderNode: h }, node, children, key }) => {
+          return h('ul', { class: 'list-disc ml-5' }, [...children])
+        }),
+        renderRule(isLink, ({ adapter: { renderNode: h }, node, children, key }) => {
+          return h(
+            'a',
+            { class: 'text-primary hover:cursor-pointer', target: '_blank', href: node.url },
+            [...children]
+          )
+        }),
       ],
       readingTime: 0,
     }
@@ -164,8 +163,11 @@ export default {
   methods: {
     renderBlock: ({ record }) => {
       if (record.__typename === 'ImageBlockRecord') {
-        return h('div', { class: 'mb-3' }, [
-          h('datocms-image', { props: { data: record.image.responsiveImage } }),
+        return h('div', { class: 'mb-3 flex justify-center' }, [
+          h('datocms-image', {
+            props: { data: record.image.responsiveImage },
+            class: '',
+          }),
         ])
       }
     },
@@ -179,7 +181,7 @@ export default {
       if (!this.ready) {
         return
       }
-      return toHead(this.data.post.seo, this.data.site.favicon)
+      return toHead(this.post.seo, this.site.favicon)
     },
   },
 }

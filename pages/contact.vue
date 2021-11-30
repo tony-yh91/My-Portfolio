@@ -18,8 +18,8 @@
             w-full
             rounded-md
             sm:text-sm
-            border border-borderSecondary
-            bg-backgroundPrimary
+            border border-primary
+            bg-bg
             text-textPrimary
           "
         />
@@ -34,8 +34,8 @@
             w-full
             rounded-md
             sm:text-sm
-            border border-borderSecondary
-            bg-backgroundPrimary
+            border border-primary
+            bg-bg
             text-textPrimary
           "
         />
@@ -50,8 +50,8 @@
             w-full
             rounded-md
             sm:text-sm
-            border border-borderSecondary
-            bg-backgroundPrimary
+            border border-primary
+            bg-bg
             text-textPrimary
           "
           placeholder="Please describe your detail."
@@ -64,12 +64,9 @@
             py-2.5
             overflow-hidden
             group
-            text-textSecondary
-            bg-buttonPrimary
-            hover:ring-2
-            hover:ring-offset-2
-            hover:ring-offset-backgroundPrimary
-            hover:ring-buttonPrimary
+            text-buttonColor
+            bg-primary
+            hover:ring-2 hover:ring-offset-2 hover:ring-offset-bg hover:ring-primary
             transition-all
             ease-out
             duration-300

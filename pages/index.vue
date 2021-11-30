@@ -4,11 +4,11 @@
     <section class="flex flex-col-reverse md:flex-row items-center md:items-start md:mt-5">
       <div class="text-center md:text-left space-y-4 mt-8 md:mt-0 md:mr-8">
         <h2 class="text-2xl font-bold">
-          {{ data.homePage.greetingHeader }}
+          {{ homePage.greetingHeader }}
         </h2>
         <div class="flex space-x-3 w-full justify-center md:justify-start">
           <a
-            v-for="(image, index) in data.homePage.contactSocialMedia"
+            v-for="(image, index) in homePage.socialMediaIcon.icon"
             :key="index"
             target="_blank"
             :href="image.customData.link"
@@ -24,8 +24,11 @@
           </a>
         </div>
         <p class="text-base md:text-lg font-light tracking-wide leading-loose">
-          Javascript Engineer at Professy.
-          {{ data.homePage.greetingDescription }}
+          Software Engineer currently working at
+          <a target="_blank" href="https://qualva.com/" class="text-base font-bold text-primary"
+            >Qualva</a
+          >.
+          {{ homePage.greetingDescription }}
         </p>
         <NuxtLink
           href="#"
@@ -38,12 +41,9 @@
             py-2.5
             overflow-hidden
             group
-            text-textSecondary
-            bg-buttonPrimary
-            hover:ring-2
-            hover:ring-offset-2
-            hover:ring-offset-backgroundPrimary
-            hover:ring-buttonPrimary
+            bg-primary
+            text-buttonColor
+            hover:ring-2 hover:ring-offset-2 hover:ring-offset-bg hover:ring-primary
             transition-all
             ease-out
             duration-300
@@ -52,132 +52,88 @@
           <span>About me</span>
         </NuxtLink>
       </div>
-      <div class="md:mr-5">
+      <div class="md:mr-5 p-9 sm:p-10 md:p-0">
         <datocms-image
-          class="
-            h-40
-            w-40
-            sm:w-60 sm:h-60
-            rounded-full
-            text-center
-            ring-4 ring-offset-backgroundPrimary ring-offset-4 ring-buttonPrimary
-          "
-          :data="data.homePage.greetingPhoto.responsiveImage"
-          :alt="data.homePage.greetingPhoto.alt"
+          class="rounded-full text-center ring-4 ring-offset-bg ring-offset-4 ring-primary"
+          :data="homePage.greetingPhoto.responsiveImage"
+          :alt="homePage.greetingPhoto.alt"
         />
       </div>
     </section>
     <!-- Projects -->
     <section class="mt-10">
-      <h3 class="text-xl md:text-2xl font-bold tracking-tight ml-2">
-        {{ data.homePage.projectContentDescription }}
-      </h3>
-      <div
-        class="
-          flex flex-col
-          md:flex-row
-          justify-center
-          items-center
-          space-x-0
-          md:space-x-5
-          space-y-5
-          md:space-y-0
-          mt-5
-        "
-      >
+      <h3 class="text-xl md:text-2xl font-bold tracking-tight ml-2">Projects</h3>
+      <div class="flex flex-col md:flex-row space-x-0 md:space-x-5 space-y-5 md:space-y-0 mt-5">
         <div
-          v-for="proj in data.homePage.projects"
+          v-for="proj in projects"
           :key="proj.id"
-          class="
-            glass-card
-            px-4
-            py-4
-            text-textPrimary
-            space-y-5
-            transform
-            transition
-            duration-500
-            hover:shadow-lg
-            cursor-pointer
-          "
+          class="glass-card cursor-pointer group"
+          @click="goto(proj.slug)"
         >
           <datocms-image
-            :data="proj.projectImage.responsiveImage"
-            class="rounded-lg transform transition duration-500 hover:scale-105"
-            :alt="proj.projectImage.alt"
+            class="rounded-tr-lg rounded-tl-lg"
+            :data="proj.previewImage.responsiveImage"
+            :alt="proj.previewImage.alt"
           />
-          <h3 class="text-lg font-bold">{{ proj.title }}</h3>
-          <p class="text-sm md:text-base font-light">
-            {{ proj.subtitle }}
-          </p>
-          <button
-            class="
-              flex
-              rounded
-              px-1
-              py-1.5
-              overflow-hidden
-              text-buttonPrimary text-sm
-              font-extralight
-              hover:text-buttonPrimaryHover
-              ml-auto
-            "
-          >
-            <NuxtLink href="#" to="contact"> More </NuxtLink>
-          </button>
+          <div class="px-3 py-3 text-center">
+            <h3 class="text-lg font-bold group-hover:text-primary-color">{{ proj.title }}</h3>
+            <div class="font-extralight text-sm mt-3 space-x-3 flex items-center justify-center">
+              <div
+                v-for="tech in proj.techStack"
+                :key="tech.id"
+                class="
+                  w-auto
+                  py-0.5
+                  px-1
+                  border
+                  rounded-xl
+                  border-primary
+                  bg-primary
+                  text-buttonColor text-center
+                "
+              >
+                {{ tech.name }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-    <!-- Blogs -->
+    <!-- Posts -->
     <section class="mt-10">
       <h3 class="text-xl md:text-2xl font-bold tracking-tight">Latest Articles</h3>
-      <div
-        class="
-          flex flex-col
-          md:flex-row
-          justify-center
-          items-center
-          space-x-0
-          md:space-x-5
-          space-y-5
-          md:space-y-0
-          mt-5
-        "
-      >
-        <div
-          v-for="post in data.allPosts"
-          :key="post.slug"
-          class="
-            glass-card
-            px-4
-            py-4
-            text-textPrimary
-            transform
-            transition
-            duration-500
-            hover:shadow-lg
-            cursor-pointer
-            group
-          "
-        >
+      <div class="flex flex-col md:flex-row space-x-0 md:space-x-5 space-y-5 md:space-y-0 mt-5">
+        <div v-for="post in posts" :key="post.slug" class="glass-card cursor-pointer group">
           <nuxt-link :to="'blog/' + post.slug">
-            <div class="space-y-5">
-              <datocms-image
-                :data="post.previewImage.responsiveImage"
-                class="rounded-lg transform transition duration-500 hover:scale-105"
-                :alt="post.previewImage.alt"
-              />
-              <h1 class="text-lg md:text-xl font-bold group-hover:text-textNavPrimary">
+            <datocms-image
+              class="rounded-tr-lg rounded-tl-lg"
+              :data="post.previewImage.responsiveImage"
+              :alt="post.previewImage.alt"
+            />
+            <div class="px-3 py-3 text-center">
+              <h1 class="text-lg md:text-xl font-bold group-hover:text-primary-color">
                 {{ post.title }}
               </h1>
-              <div class="font-extralight text-sm mt-3 space-x-3">
-                <span>#{{ post.category.name }}</span>
+              <div class="font-extralight text-sm mt-3 space-x-3 flex items-center justify-center">
+                <div
+                  v-for="category in post.category"
+                  :key="category.id"
+                  class="
+                    w-auto
+                    py-0.5
+                    px-1
+                    border
+                    rounded-xl
+                    border-primary
+                    bg-primary
+                    text-buttonColor text-center
+                  "
+                >
+                  {{ category.name }}
+                </div>
               </div>
-              <p class="mt-3 text-base md:text-lg font-light tracking-wide leading-loose">
-                {{ post.excerpt }}
-              </p>
-              <div class="font-extralight text-sm mt-3 text-textNavPrimary">
-                <span>{{ $moment(post.publishedDate).format('MMMM D YYYY') }}</span>
+              <div class="font-extralight text-sm mt-3 text-primary-color">
+                <span>{{ $moment(post.updatedDate).format('MMMM D YYYY') }}</span>
               </div>
             </div>
           </nuxt-link>
@@ -190,17 +146,18 @@
         class="
           px-5
           py-5
+          md:py-0
           grid
           md:grid-cols-3
           gap-3
           place-items-center
           rounded-lg
           shadow-lg
-          bg-backgroundSecondary
+          glass-card
         "
       >
         <div class="md:col-span-2 space-y-7">
-          <h3 class="text-lg md:text-xl font-bold">Want to hire me?</h3>
+          <h3 class="text-lg md:text-xl font-bold">Need some collaboration?</h3>
           <p class="mt-3 mb-3 text-sm md:text-base font-light">
             Feel free to reach out to me anytime if you're looking for a developer, have a question,
             or just want to connect.
@@ -211,12 +168,10 @@
               px-5
               py-2.5
               overflow-hidden
-              text-textSecondary
-              bg-buttonPrimary
-              hover:ring-2
-              hover:ring-offset-2
-              hover:ring-buttonPrimary
-              hover:ring-offset-backgroundPrimary
+              text-white
+              bg-primary
+              text-buttonColor
+              hover:ring-2 hover:ring-offset-2 hover:ring-primary hover:ring-offset-bg
               transition-all
               ease-out
               duration-300
@@ -226,11 +181,7 @@
           </button>
         </div>
         <div class="p-3 flex justify-center row-start-1 md:row-start-auto">
-          <datocms-image
-            :data="data.homePage.contactPhoto.responsiveImage"
-            :alt="data.homePage.contactPhoto.responsiveImage.alt"
-            lazy-load
-          />
+          <img src="../assets/programming.svg" alt="Contact Picture" />
         </div>
       </div>
     </section>
@@ -239,37 +190,42 @@
 
 <script>
 import { toHead } from 'vue-datocms'
-import { request } from '../lib/datocms'
+import { request, imageFields, seoMetaTagsFields, gql } from '../lib/datocms'
 
 export default {
-  async asyncData({ $axios, error }) {
+  async asyncData() {
     const data = await request({
-      query: `
+      query: gql`
         {
           site: _site {
             favicon: faviconMetaTags {
-              attributes
-              content
-              tag
+              ...seoMetaTagsFields
             }
           }
-          allPosts(first: "2", orderBy: _firstPublishedAt_DESC) {
+          projects: allProjectShowcases(first: "2", orderBy: _firstPublishedAt_ASC) {
             id
             title
             slug
-            excerpt
-            publishedDate: _firstPublishedAt
+            updatedDate: date
+            techStack {
+              id
+              name
+            }
             previewImage {
-              responsiveImage(imgixParams: { auto: enhance, h: 500 }){
-                src
-                srcSet
-                title
-                width
-                alt
-                aspectRatio
-                base64
-                height
-                sizes
+              responsiveImage(imgixParams: { fm: jpg, q: 60, fit: crop, w: 500, h: 280 }) {
+                ...imageFields
+              }
+            }
+          }
+          posts: allPosts(first: "2", orderBy: _firstPublishedAt_ASC) {
+            id
+            title
+            slug
+            publishedDate: _firstPublishedAt
+            updatedDate: date
+            previewImage {
+              responsiveImage(imgixParams: { fm: jpg, q: 60, fit: crop, w: 500, h: 280 }) {
+                ...imageFields
               }
             }
             author {
@@ -277,101 +233,54 @@ export default {
               _firstPublishedAt
             }
             category {
+              id
               name
               slug
             }
           }
           homePage {
             seo: _seoMetaTags {
-              attributes
-              content
-              tag
+              ...seoMetaTagsFields
             }
             greetingHeader
             greetingDescription
             greetingPhoto {
               alt
-              responsiveImage(imgixParams: { auto: enhance }) {
-                aspectRatio
-                alt
-                base64
-                height
-                sizes
-                src
-                srcSet
-                webpSrcSet
-                title
-                width
+              responsiveImage(
+                imgixParams: { fm: jpg, q: 75, auto: enhance, fit: max, w: 600, h: 600 }
+              ) {
+                ...imageFields
               }
             }
-            contactSocialMedia {
-              customData
-              responsiveImage(imgixParams: { fit: crop, auto: enhance, w: 30, h: 30 }) {
-                base64
-                aspectRatio
-                alt
-                height
-                sizes
-                src
-                srcSet
-                title
-                width
-              }
-            }
-            projectContentHeader
-            projectContentDescription
-            projects {
-              id
-              title
-              subtitle
-              projectImage {
-                alt
-                responsiveImage(imgixParams: { ar: "16:9", auto: enhance }) {
-                  src
-                  srcSet
-                  title
-                  width
-                  alt
-                  aspectRatio
-                  base64
-                  height
-                  sizes
+            socialMediaIcon {
+              icon {
+                customData
+                responsiveImage(imgixParams: { fm: jpg, q: 75, fit: max, w: 30, h: 30 }) {
+                  ...imageFields
                 }
               }
             }
             contactHeader
             contactDescription
-            contactPhoto {
-              responsiveImage(imgixParams: { auto: enhance }) {
-                alt
-                aspectRatio
-                base64
-                height
-                sizes
-                src
-                srcSet
-                title
-                width
-              }
-            }
           }
         }
+
+        ${imageFields}
+        ${seoMetaTagsFields}
       `,
-      axios: $axios,
-      error,
     })
-    return { data }
-  },
-  data() {
-    return {
-      cardHover: false,
-    }
+    return { ready: !!data, ...data }
   },
   head() {
-    if (!this || !this.data) {
+    if (!this.ready) {
       return
     }
-    return toHead(this.data.homePage.seo, this.data.site.favicon)
+    return toHead(this.homePage.seo, this.site.favicon)
+  },
+  methods: {
+    goto(slug) {
+      this.$router.push(`projects/${slug}`)
+    },
   },
 }
 </script>

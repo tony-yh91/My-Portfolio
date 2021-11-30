@@ -27,10 +27,9 @@ exports.handler = async () => {
     }
   } catch (error) {
     console.error('error', error)
-    const errorObj = {
+    return {
       statusCode: error.response ? error.response.status : 500,
       body: error.response ? error.response.statusText : error.message,
     }
-    return errorObj
   }
 }

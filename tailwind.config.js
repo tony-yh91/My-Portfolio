@@ -3,23 +3,19 @@ module.exports = {
   mode: 'jit',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    container: {
-      center: true,
-    },
     colors: {
-      textPrimary: 'var(--color-text-primary)',
-      textSecondary: 'var(--color-text-secondary)',
-      textNavPrimary: 'var(--color-text-nav-primary)',
-      buttonPrimary: 'var(--color-button-primary)',
-      buttonPrimaryHover: 'var(--color-button-primary-hover)',
-      buttonSecondary: 'var(--color-button-secondary)',
-      backgroundPrimary: 'var(--color-background-primary)',
-      backgroundSecondary: 'var(--color-background-secondary)',
-      borderPrimary: 'var(--color-border-primary)',
-      borderSecondary: 'var(--color-border-secondary)',
-      iconPrimary: 'var(--color-icon-background-primary)',
+      primary: 'var(--primary-color)',
+      secondary: 'var(--secondary-color)',
+      accent: 'var(--accent-color)',
+      textPrimary: 'var(--text-primary-color)',
+      buttonColor: 'var(--text-btn-color)',
+      bg: 'var(--bg-color)',
+      bgBorder: 'var(--glass-card-color)',
     },
   },
+  // corePlugins: {
+  //   listStyleType: false,
+  // },
   variants: {},
   // plugins: [
   //   plugin(function ({ addVariant, e, postcss }) {

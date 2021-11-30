@@ -1,33 +1,39 @@
 <template>
   <div class="w-11/12 max-w-5xl mx-auto px-1">
     <section class="mt-5">
-      <h1 class="text-xl md:text-2xl font-bold tracking-tight">Blog</h1>
-      <div class="grid sm:grid-cols-2 grid-flow-row gap-7 mt-4">
-        <div
-          v-for="post in data.allPosts"
-          :key="post.slug"
-          class="group glass-card px-5 py-5 hover:shadow-lg"
-        >
+      <h1 class="text-xl md:text-2xl font-bold tracking-tight text-center">Blog</h1>
+      <div class="grid sm:grid-cols-2 grid-flow-row gap-5 mt-10">
+        <div v-for="post in posts" :key="post.slug" class="group glass-card">
           <nuxt-link :to="'blog/' + post.slug">
-            <div class="space-y-5">
-              <datocms-image
-                :data="post.previewImage.responsiveImage"
-                class="rounded-lg transform transition duration-500 hover:scale-105"
-                :alt="post.previewImage.alt"
-              />
-              <h3
-                class="text-lg md:text-xl font-bold group-hover:text-textNavPrimary cursor-pointer"
-              >
+            <datocms-image
+              :data="post.previewImage.responsiveImage"
+              class="rounded-lg"
+              :alt="post.previewImage.alt"
+            />
+            <div class="px-3 py-3 text-center">
+              <h1 class="text-lg md:text-xl font-bold group-hover:text-primary-color">
                 {{ post.title }}
-              </h3>
-              <div class="font-extralight text-sm mt-3 space-x-3">
-                <span>#{{ post.category.name }}</span>
+              </h1>
+              <div class="font-extralight text-sm mt-3 space-x-3 flex items-center justify-center">
+                <div
+                  v-for="category in post.category"
+                  :key="category.id"
+                  class="
+                    w-auto
+                    py-0.5
+                    px-1
+                    border
+                    rounded-xl
+                    border-primary
+                    bg-primary
+                    text-buttonColor text-center
+                  "
+                >
+                  {{ category.name }}
+                </div>
               </div>
-              <p class="mt-3 text-base md:text-lg font-light tracking-wide leading-loose">
-                {{ post.excerpt }}
-              </p>
-              <div class="font-extralight text-sm mt-3 text-textNavPrimary">
-                <span>{{ $moment(post.publishedDate).format('MMMM D YYYY') }}</span>
+              <div class="font-extralight text-sm mt-3 text-primary-color">
+                <span>{{ $moment(post.updatedDate).format('MMMM D YYYY') }}</span>
               </div>
             </div>
           </nuxt-link>
@@ -39,37 +45,28 @@
 
 <script>
 import { toHead } from 'vue-datocms'
-import { request } from '../../lib/datocms'
+import { request, gql, imageFields, seoMetaTagsFields } from '../../lib/datocms'
 
 export default {
-  async asyncData({ $axios, error }) {
+  async asyncData() {
     const data = await request({
-      query: `
+      query: gql`
         {
           site: _site {
             favicon: faviconMetaTags {
-              attributes
-              content
-              tag
+              ...seoMetaTagsFields
             }
           }
-          allPosts(first: "10", orderBy: _firstPublishedAt_DESC) {
+          posts: allPosts(first: "10", orderBy: _firstPublishedAt_ASC) {
             id
             title
             slug
             excerpt
             publishedDate: _firstPublishedAt
+            updatedDate: date
             previewImage {
-              responsiveImage(imgixParams: { auto: enhance, h: 500, ar: "16:9" }){
-                src
-                srcSet
-                title
-                width
-                alt
-                aspectRatio
-                base64
-                height
-                sizes
+              responsiveImage(imgixParams: { fm: jpg, q: 60, fit: min, w: 500, h: 220 }) {
+                ...imageFields
               }
             }
             author {
@@ -77,22 +74,23 @@ export default {
               _firstPublishedAt
             }
             category {
+              id
               name
               slug
             }
           }
         }
+        ${imageFields}
+        ${seoMetaTagsFields}
       `,
-      axios: $axios,
-      error,
     })
-    return { data }
+    return { ready: !!data, ...data }
   },
   head() {
     if (!this.ready) {
       return
     }
-    return toHead(this.data.site.favicon)
+    return toHead(this.site.favicon)
   },
 }
 </script>

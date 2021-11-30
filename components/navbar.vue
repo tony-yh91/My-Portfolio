@@ -10,7 +10,7 @@
       backdrop-filter backdrop-blur-lg
       border-b
       bg-opacity-10
-      border-borderPrimary
+      border-bgBorder
       transition
     "
   >
@@ -22,7 +22,7 @@
         <div class="mr-2">
           <button
             v-if="darkMode"
-            class="p-2 bg-iconPrimary rounded-md"
+            class="p-2 bg-glass-card-primary-color rounded-md"
             aria-label="Dark Mode"
             @click="toggleTheme"
           >
@@ -44,7 +44,7 @@
 
           <button
             v-if="!darkMode"
-            class="p-2 bg-iconPrimary rounded-md"
+            class="p-2 bg-glass-card-primary-color rounded-md"
             aria-label="Light Mode"
             @click="toggleTheme"
           >
@@ -68,100 +68,34 @@
           <NuxtLink
             href="#"
             to="/"
-            exact-active-class="text-textNavPrimary"
-            class="hover:text-textNavPrimary px-1 sm:px-3 py-2 rounded-md font-light text-base"
+            exact-active-class="text-primary"
+            class="hover:text-primary px-1 sm:px-3 py-2 rounded-md font-light text-base"
             >Home</NuxtLink
           >
           <NuxtLink
             href="#"
-            to="/"
-            exact-active-class="text-textNavPrimary"
-            class="hover:text-textNavPrimary px-1 sm:px-3 py-2 rounded-md font-light text-base"
+            to="/projects"
+            active-class="text-primary"
+            class="hover:text-primary px-1 sm:px-3 py-2 rounded-md font-light text-base"
             >Projects</NuxtLink
           >
           <NuxtLink
             href="#"
             to="/blog"
-            active-class="text-textNavPrimary"
-            class="hover:text-textNavPrimary px-1 sm:px-3 py-2 rounded-md font-light text-base"
+            active-class="text-primary"
+            class="hover:text-primary px-1 sm:px-3 py-2 rounded-md font-light text-base"
             >Blog</NuxtLink
           >
           <NuxtLink
             href="#"
             to="/about"
-            exact-active-class="text-textNavPrimary"
-            class="hover:text-textNavPrimary px-1 sm:px-3 py-2 rounded-md font-light text-base"
+            exact-active-class="text-primary"
+            class="hover:text-primary px-1 sm:px-3 py-2 rounded-md font-light text-base"
             >About</NuxtLink
           >
         </div>
       </div>
-      <!-- <NuxtLink
-            href="#"
-            to="contact"
-            class="
-              bg-transparent
-              dark:text-white
-              font-semibold
-              py-2
-              px-4
-              border-2 border-green-500
-              duration-300
-              rounded-lg
-              hover:border-transparent hover:bg-green-600 hover:text-white
-              text-sm
-              sm:text-base
-            "
-            exact-active-class="bg-transparent border-transparent rounded-lg bg-green-600 text-white"
-            >Contact me</NuxtLink
-          > -->
-      <!-- </div> -->
     </nav>
-    <!-- </div> -->
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <!-- <nav
-      class="
-        sm:hidden
-        menu-link
-        top-0
-        absolute
-        w-full
-        bg-whit
-        backdrop-filter backdrop-blur-md
-        bg-opacity-50
-        firefox:bg-opacity-400
-      "
-      :class="[isMenuOn ? 'show' : 'hide']"
-    >
-      <div class="px-5 pt-24 py-5 space-y-3 text-left font-bold text-2xl h-screen">
-        <div
-          class="menu-link dark:text-white"
-          :class="[isMenuOn ? 'show' : 'hide']"
-          style="transition: transform 0.5s"
-        >
-          <NuxtLink
-            to="/"
-            exact-active-class="text-green-400"
-            class="block px-3 py-2 rounded-md"
-            @click.native="isMenuOn = false"
-            >Home</NuxtLink
-          >
-        </div>
-        <div
-          class="menu-link dark:text-white"
-          :class="[isMenuOn ? 'show' : 'hide']"
-          style="transition: transform 0.8s"
-        >
-          <NuxtLink
-            href="#"
-            to="about"
-            exact-active-class="text-green-400"
-            class="block px-3 py-2 rounded-md"
-            @click.native="isMenuOn = false"
-            >About</NuxtLink
-          >
-        </div>
-      </div>
-    </nav> -->
   </header>
 </template>
 <script>

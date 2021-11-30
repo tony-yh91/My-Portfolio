@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap');
+
 *,
 *::before,
 *::after {
@@ -6,54 +8,28 @@
 }
 
 :root {
-  --color-text-primary: #222f3e;
-  --color-text-secondary: #fff;
-  --color-text-nav-primary: #16a085;
-  --color-button-primary: #16a085;
-  --color-button-primary-hover: #208a75;
-  --color-button-secondary: #2f485e;
-  --color-background-primary: #fff;
-  --color-background-secondary: #f3f4f6;
-  --color-border-primary: #e5e7eb;
-  --color-border-secondary: #16a085;
-  --color-icon-background-primary: #f3f4f6;
+  --bg-color: #ffffff;
+  --primary-color: #067b5a; 
+  --secondary-color: #aea9a5;
+  --text-primary-color: #2d2d2d;
+  --text-btn-color: #f6f6f6;
+  --glass-card-color: rgba(243,244,246, 0.75);
+  --code-color: #1F2937;
 }
 
 .dark-mode {
-  --color-text-primary: #ebf4f1;
-  --color-text-secondary: #222f3e;
-  --color-text-nav-primary: #41b38a;
-  --color-button-primary: #41b38a;
-  --color-button-primary-hover: #208a75;
-  --color-button-secondary: #fdf9f3;
-  --color-background-primary: #111827;
-  --color-background-secondary: #1e293b;
-  --color-border-primary: #0d2538;
-  --color-border-secondary: #16a085;
-  --color-icon-background-primary: #f3f4f6;
-}
-
-.ash-mode {
-  --color-text-primary: #ebf4f1;
-  --color-text-secondary: #222f3e;
-  --color-text-nav-primary: #41b38a;
-  --color-button-primary: #41b38a;
-  --color-button-secondary: #fdf9f3;
-  --color-background-primary: #536976;
-  --color-background-secondary: #1e293b;
-  --color-border-primary: #0d2538;
+  --bg-color: #111927;
+  --primary-color: #067b5a;
+  --secondary-color: #aea9a5;
+  --text-primary-color: #f6f6f6;
+  --glass-card-color: rgba(30, 41, 59, 0.75);
 }
 
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
-
-  /* background: #536976; */
-  background: -webkit-linear-gradient(to right, #292e49, #536976);
-  background: linear-gradient(to right, #292e49, #536976);
-
-  background: var(--color-background-primary);
-  color: var(--color-text-primary);
+  background: var(--bg-color);
+  color: var(--text-primary-color);
   transition: background-color 0.3s;
 }
 
@@ -66,18 +42,19 @@ html {
   opacity: 0;
 }
 
-/* Glassmorphism card effect */
 .glass-card {
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: var(--color-background-secondary);
-  /* background-color: rgba(255, 255, 255, 0.75); */
+  background-color: var(--glass-card-color);
   border-radius: 12px;
-  /* border: 1px solid rgba(209, 213, 219, 0.3); */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.glass-card:hover {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3);
 }
 
 .highlight code {
-  background-color: var(--color-background-secondary);
+  background-color: var(--code-color);
   padding: 20px;
   line-height: 2.5rem;
 }

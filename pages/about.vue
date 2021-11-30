@@ -3,9 +3,9 @@
     <!-- About me  -->
     <section class="space-y-6 flex flex-col">
       <h3 class="text-xl md:text-2xl font-bold tracking-tight">
-        {{ data.aboutPage.aboutMeHeader }}
+        {{ aboutPage.aboutMeHeader }}
       </h3>
-      <div v-for="(text, index) in data.aboutPage.aboutMeText.value.document.children" :key="index">
+      <div v-for="(text, index) in aboutPage.aboutMeText.value.document.children" :key="index">
         <p class="text-base md:text-lg font-light">
           {{ text.children[0].value }}
         </p>
@@ -15,10 +15,10 @@
     <section class="flex flex-col lg:flex-row space-y-3 lg:space-y-0 justify-between mt-10">
       <div>
         <h3 class="text-xl md:text-2xl font-bold tracking-tight">
-          {{ data.aboutPage.timelineExperienceTitle }}
+          {{ aboutPage.timelineExperienceTitle }}
         </h3>
         <div
-          v-for="prevJob in data.aboutPage.timelineJobs.slice().reverse()"
+          v-for="prevJob in aboutPage.timelineJobs.slice().reverse()"
           :key="prevJob.id"
           class="flex px-3 py-5"
         >
@@ -45,10 +45,10 @@
       <!-- Education & Certificates -->
       <div>
         <h3 class="text-xl md:text-2xl font-bold tracking-tight">
-          {{ data.aboutPage.timelineCertificateTitle }}
+          {{ aboutPage.timelineCertificateTitle }}
         </h3>
         <div
-          v-for="certificate in data.aboutPage.timelineCertificates.slice().reverse()"
+          v-for="certificate in aboutPage.timelineCertificates.slice().reverse()"
           :key="certificate.id"
           class="flex px-5 py-5"
         >
@@ -78,10 +78,10 @@
     <!-- TOOLBOX -->
     <section class="space-y-6 mt-10">
       <h3 class="text-xl md:text-2xl font-bold tracking-tight">
-        {{ data.aboutPage.toolboxDescription }}
+        {{ aboutPage.toolboxDescription }}
       </h3>
       <div class="flex flex-wrap justify-center items-center">
-        <div v-for="(img, index) in data.aboutPage.toolboxImages" :key="index" class="m-5">
+        <div v-for="(img, index) in aboutPage.toolboxImages" :key="index" class="m-5">
           <datocms-image :data="img.responsiveImage" lazy-load />
         </div>
       </div>
@@ -113,76 +113,59 @@
 
 <script>
 import { toHead } from 'vue-datocms'
-import { request } from '../lib/datocms'
+import { request, imageFields, seoMetaTagsFields, gql } from '../lib/datocms'
 
 export default {
-  async asyncData({ $axios, error }) {
+  async asyncData() {
     const data = await request({
-      query: `
-      {
-        site: _site {
-          favicon: faviconMetaTags {
-            attributes
-            content
-            tag
+      query: gql`
+        {
+          site: _site {
+            favicon: faviconMetaTags {
+              ...seoMetaTagsFields
+            }
           }
-        }
-        aboutPage {
-          seo: _seoMetaTags {
-            attributes
-            content
-            tag
-          }
-          aboutMeHeader
-          aboutMeDescription
-          aboutMeText {
-            value
-          }
-          timelineHeader
-          timelineExperienceTitle
-          timelineJobs
-          timelineCertificateTitle
-          timelineCertificates
-          toolboxHeader
-          toolboxDescription
-          toolboxImages {
-            responsiveImage(imgixParams: {auto: enhance, w: "84", h: "84"}) {
-              base64
-              aspectRatio
-              alt
-              height
-              sizes
-              src
-              srcSet
-              title
-              width
+          aboutPage {
+            seo: _seoMetaTags {
+              ...seoMetaTagsFields
+            }
+            aboutMeHeader
+            aboutMeDescription
+            aboutMeText {
+              value
+            }
+            timelineHeader
+            timelineExperienceTitle
+            timelineJobs
+            timelineCertificateTitle
+            timelineCertificates
+            toolboxHeader
+            toolboxDescription
+            toolboxImages {
+              responsiveImage(imgixParams: { auto: enhance, w: "84", h: "84" }) {
+                ...imageFields
+              }
             }
           }
         }
-      }`,
-      axios: $axios,
-      error,
+        ${imageFields}
+        ${seoMetaTagsFields}
+      `,
     })
-    return { data }
+    return { ready: !!data, ...data }
   },
   data() {
     return {
-      data: null,
       track: null,
     }
   },
   head() {
-    if (!this || !this.data) {
+    if (!this.ready) {
       return
     }
-    return toHead(this.data.aboutPage.seo, this.data.site.favicon)
+    return toHead(this.aboutPage.seo, this.site.favicon)
   },
-  computed: {
-    reorderJobs() {
-      return this.data.aboutPage.timelineJobs.slice().reverse()
-    },
-  },
-  mounted() {
+  created() {
     this.spotifyCurrentlyPlaying()
   },
   methods: {
@@ -193,7 +176,7 @@ export default {
           url: '/SpotifyCurrentTrack',
           baseURL: process.env.NETLIFY_FUNCTION_URL,
         })
-        // console.log(response)
+        console.log(response)
         if (response.status === 200) {
           this.bindMusic(response.data)
         }

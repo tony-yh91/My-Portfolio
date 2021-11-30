@@ -1,5 +1,5 @@
 <template>
-  <footer class="mx-auto px-2 items-center w-11/12 max-w-5xl mt-10 border-t border-borderPrimary">
+  <footer class="mx-auto px-2 items-center w-11/12 max-w-5xl mt-10 border-t border-bgBorder">
     <div class="container py-10 flex flex-row">
       <nav class="space-y-5 w-1/2">
         <h2 class="font-bold uppercase">Pages</h2>
@@ -7,19 +7,19 @@
           <NuxtLink href="#" to="blog">
             <li class="hover:text-buttonPrimaryHover py-1">Blog</li>
           </NuxtLink>
-          <NuxtLink href="#" to="about">
+          <NuxtLink href="#" to="/projects">
             <li class="hover:text-buttonPrimaryHover py-1">Projects</li>
           </NuxtLink>
-          <NuxtLink href="#" to="about">
+          <NuxtLink href="#" to="/about">
             <li class="hover:text-buttonPrimaryHover py-1">About</li>
           </NuxtLink>
         </ul>
       </nav>
       <div class="flex flex-col space-y-6 w-1/2 items-end">
         <h2 class="font-bold uppercase">Soical Media</h2>
-        <div class="flex space-x-3">
+        <div v-if="data" class="flex space-x-3">
           <a
-            v-for="(image, index) in data.footer.contactSocialMedia"
+            v-for="(image, index) in data.footer.socialMediaIcon.icon"
             :key="index"
             :href="image.customData.link"
             target="_blank"
@@ -51,41 +51,34 @@
 </template>
 
 <script>
-import { request } from '../lib/datocms'
+import { request, gql, imageFields } from '../lib/datocms'
 
 export default {
   data() {
     return {
-      data: null,
+      data: [],
     }
   },
   async fetch() {
-    const data = await request({
-      query: `
-      {
-        footer {
+    this.data = await request({
+      query: gql`
+        {
+          footer {
             title
-            contactSocialMedia {
-              customData
-              alt
-              responsiveImage(imgixParams: {fit: crop, auto: enhance, w: 35, h: 35}) {
-                base64
-                aspectRatio
+            socialMediaIcon {
+              icon {
+                customData
                 alt
-                height
-                sizes
-                src
-                srcSet
-                title
-                width
+                responsiveImage(imgixParams: { fm: jpg, q: 75, fit: max, w: 35, h: 35 }) {
+                  ...imageFields
+                }
+              }
             }
           }
         }
-      }
+        ${imageFields}
       `,
-      axios: this.$axios,
     })
-    this.data = data
   },
 }
 </script>
