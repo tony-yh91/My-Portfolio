@@ -11,7 +11,7 @@
     <div class="font-extralight text-base space-y-1">
       <div>
         By <span class="font-bold">{{ post.author.name }}</span> •
-        {{ $moment(post.publishedDate).format('MMM D YYYY') }} • {{ readingTime }} minute read
+        {{ $moment(post.updatedDate).format('MMM D YYYY') }} • {{ readingTime }} minute read
       </div>
     </div>
     <div ref="article">
@@ -90,6 +90,7 @@ export default {
             title
             slug
             publishedDate: _firstPublishedAt
+            updatedDate: date
             _updatedAt
             author {
               name

@@ -92,7 +92,7 @@
       <div class="flex flex-col">
         <p class="text-sm tracking-tight">
           This section is created with Netlify serverless function that will keep tracking on
-          currently playing songs of my spotify account.
+          currently playing songs of my Spotify.
         </p>
         <div class="glass-card items-center flex gap-2 mt-5 py-2 pl-2 max-w-sm">
           <img v-if="track" :src="track.album_art" width="64" height="64" class="rounded-md" />
