@@ -176,7 +176,7 @@ export default {
           url: '/SpotifyCurrentTrack',
           baseURL: process.env.NETLIFY_FUNCTION_URL,
         })
-        console.log(response)
+        // console.log(response)
         if (response.status === 200) {
           this.bindMusic(response.data)
         }

@@ -78,6 +78,16 @@ export default {
 
   env: {
     NETLIFY_FUNCTION_URL: process.env.NETLIFY_FUNCTION_URL,
+    DATO_CMS_TOKEN: process.env.DATO_CMS_TOKEN,
+    MAIL_PASSWORD: process.env.MAIL_PASSWORD,
+    MAIL_USERNAME: process.env.MAIL_USERNAME,
+    OAUTH_CLIENTID: process.env.OAUTH_CLIENTID,
+    OAUTH_CLIENT_SECRET: process.env.OAUTH_CLIENT_SECRET,
+    OAUTH_REFRESH_TOKEN: process.env.OAUTH_REFRESH_TOKEN,
+    SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
+    SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_SECRET_KEY: process.env.SUPABASE_SECRET_KEY,
   },
 
   loading: false,
