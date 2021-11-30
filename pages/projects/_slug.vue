@@ -1,11 +1,12 @@
 <template>
   <div class="w-11/12 max-w-5xl mx-auto px-1">
     <h1 class="text-2xl md:text-4xl font-bold text-center tracking-tight">{{ project.title }}</h1>
-    <datocms-image
-      class="rounded-tr-lg rounded-tl-lg mt-5"
-      :data="project.previewImage.responsiveImage"
-      :alt="project.previewImage.alt"
-    />
+    <a :href="project.previewImage.responsiveImage.src" target="_blank" rel="noopener noreferrer">
+      <datocms-image
+        class="rounded-tr-lg rounded-tl-lg mt-5"
+        :data="project.previewImage.responsiveImage"
+        :alt="project.previewImage.responsiveImage.alt"
+    /></a>
     <div class="flex justify-evenly mt-5 mb-5">
       <div class="space-y-1">
         <h3 class="text-sm sm:text-base font-bold uppercase">Type</h3>
@@ -139,6 +140,10 @@ export default {
         default:
           return null
       }
+    },
+    openPhoto(src) {
+      console.log(src)
+      window.open(src, '_blank')
     },
   },
 }

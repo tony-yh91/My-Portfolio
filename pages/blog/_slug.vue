@@ -105,7 +105,7 @@ export default {
                 ... on ImageBlockRecord {
                   id
                   image {
-                    responsiveImage(imgixParams: {fm: jpg, q: 60, fit: crop, w: 500, h: 350}) {
+                    responsiveImage(imgixParams: {fm: jpg, q: 60, fit: max, w: 500, h: 350}) {
                       ...imageFields
                     }
                   }
