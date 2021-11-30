@@ -7,7 +7,7 @@
       p-2
       sm:p-3
       mb-5
-      backdrop-filter backdrop-blur-lg
+      backdrop-blur
       border-b
       bg-opacity-10
       border-bgBorder
@@ -241,5 +241,18 @@ export default {
 }
 .dark-mode-transition {
   transition: background-color 0.5s;
+}
+/* slightly transparent fallback */
+.backdrop-blur {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .backdrop-blur {
+    background-color: rgba(255, 255, 255, 0.5);
+    -webkit-backdrop-filter: blur(2em);
+    backdrop-filter: blur(2em);
+  }
 }
 </style>
