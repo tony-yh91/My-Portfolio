@@ -25,7 +25,11 @@
         </div>
         <p class="text-base md:text-lg font-light tracking-wide leading-loose">
           Software Engineer currently working at
-          <a target="_blank" href="https://qualva.com/" class="text-base font-bold text-primary"
+          <a
+            target="_blank"
+            href="https://qualva.com/"
+            class="text-base font-bold text-linkColor"
+            rel="noopener noreferrer"
             >Qualva</a
           >.
           {{ homePage.greetingDescription }}
@@ -157,7 +161,7 @@
         "
       >
         <div class="md:col-span-2 space-y-7">
-          <h3 class="text-lg md:text-xl font-bold">Need some collaboration?</h3>
+          <h1 class="text-lg md:text-xl font-bold">Need collaboration?</h1>
           <p class="mt-3 mb-3 text-sm md:text-base font-light">
             Feel free to reach out to me anytime if you're looking for a developer, have a question,
             or just want to connect.

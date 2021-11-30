@@ -4,15 +4,15 @@
       <nav class="space-y-5 w-1/2">
         <h2 class="font-bold uppercase">Pages</h2>
         <ul class="flex flex-col items-start cursor-pointer">
-          <NuxtLink href="#" to="blog">
-            <li class="hover:text-buttonPrimaryHover py-1">Blog</li>
-          </NuxtLink>
-          <NuxtLink href="#" to="/projects">
-            <li class="hover:text-buttonPrimaryHover py-1">Projects</li>
-          </NuxtLink>
-          <NuxtLink href="#" to="/about">
-            <li class="hover:text-buttonPrimaryHover py-1">About</li>
-          </NuxtLink>
+          <li class="hover:text-buttonPrimaryHover py-1">
+            <NuxtLink href="#" to="blog"> Blog </NuxtLink>
+          </li>
+          <li class="hover:text-buttonPrimaryHover py-1">
+            <NuxtLink href="#" to="/projects"> Projects </NuxtLink>
+          </li>
+          <li class="hover:text-buttonPrimaryHover py-1">
+            <NuxtLink href="#" to="/about"> About </NuxtLink>
+          </li>
         </ul>
       </nav>
       <div class="flex flex-col space-y-6 w-1/2 items-end">

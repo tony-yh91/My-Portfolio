@@ -9,6 +9,7 @@ module.exports = {
       accent: 'var(--accent-color)',
       textPrimary: 'var(--text-primary-color)',
       buttonColor: 'var(--text-btn-color)',
+      linkColor: 'var(--text-link-color)',
       bg: 'var(--bg-color)',
       bgBorder: 'var(--glass-card-color)',
     },

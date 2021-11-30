@@ -149,7 +149,12 @@ export default {
         renderRule(isLink, ({ adapter: { renderNode: h }, node, children, key }) => {
           return h(
             'a',
-            { class: 'text-primary hover:cursor-pointer', target: '_blank', href: node.url },
+            {
+              class: 'text-linkColor hover:cursor-pointer',
+              target: '_blank',
+              href: node.url,
+              rel: 'noopener noreferrer',
+            },
             [...children]
           )
         }),
