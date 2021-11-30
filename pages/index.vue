@@ -60,7 +60,7 @@
         <datocms-image
           class="rounded-full text-center ring-4 ring-offset-bg ring-offset-4 ring-primary"
           :data="homePage.greetingPhoto.responsiveImage"
-          :alt="homePage.greetingPhoto.alt"
+          :alt="homePage.greetingPhoto.responsiveImage.alt"
         />
       </div>
     </section>
@@ -77,7 +77,7 @@
           <datocms-image
             class="rounded-tr-lg rounded-tl-lg"
             :data="proj.previewImage.responsiveImage"
-            :alt="proj.previewImage.alt"
+            :alt="proj.previewImage.responsiveImage.alt"
           />
           <div class="px-3 py-3 text-center">
             <h3 class="text-lg font-bold group-hover:text-primary-color">{{ proj.title }}</h3>
@@ -112,7 +112,7 @@
             <datocms-image
               class="rounded-tr-lg rounded-tl-lg"
               :data="post.previewImage.responsiveImage"
-              :alt="post.previewImage.alt"
+              :alt="post.previewImage.responsiveImage.alt"
             />
             <div class="px-3 py-3 text-center">
               <h1 class="text-lg md:text-xl font-bold group-hover:text-primary-color">
@@ -185,7 +185,7 @@
           </button>
         </div>
         <div class="p-3 flex justify-center row-start-1 md:row-start-auto">
-          <img src="../assets/programming.svg" alt="Contact Picture" />
+          <img src="../assets/programming.svg" alt="Contact Picture" title="Contact Picture" />
         </div>
       </div>
     </section>
